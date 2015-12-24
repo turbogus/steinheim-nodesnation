@@ -1,0 +1,7 @@
+default
+farming
+dye
+craft_guide
+bucket?
+fire?
+tnt?
