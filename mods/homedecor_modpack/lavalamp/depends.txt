@@ -1,0 +1,3 @@
+wool
+bucket
+craft_guide

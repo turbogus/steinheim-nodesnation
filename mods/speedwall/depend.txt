@@ -1,0 +1,2 @@
+common
+minetest_game
