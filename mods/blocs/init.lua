@@ -127,8 +127,17 @@ minetest.register_abm({
 		default.gen_clay(pos, node, active_object_count, active_object_count_wider)
 	end,
 })
+minetest.register_abm({
+	nodenames = {"default:gravel"},
+	neighbors = {"default:water_flowing"},
+	interval = 3,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		default.gen_clay(pos, node, active_object_count, active_object_count_wider)
+	end,
+})
 
--- Création de stone with iron quand on pose un bloc de gravel dans la lave (1 chance sur 3)
+-- Création de stone with iron ou stone with copper quand on pose un bloc de gravel dans la lave (1 chance sur 3)
 default.gen_iron = function(pos)	
 	minetest.set_node(pos, {name="default:stone_with_iron"})
 end
@@ -136,9 +145,39 @@ minetest.register_abm({
 	nodenames = {"default:gravel"},
 	neighbors = {"default:lava_source"},
 	interval = 3,
-	chance = 3,
+	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		default.gen_iron(pos, node, active_object_count, active_object_count_wider)
+	end,
+})
+minetest.register_abm({
+	nodenames = {"default:gravel"},
+	neighbors = {"default:lava_flowing"},
+	interval = 3,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		default.gen_iron(pos, node, active_object_count, active_object_count_wider)
+	end,
+})
+default.gen_copper = function(pos)	
+	minetest.set_node(pos, {name="default:stone_with_copper"})
+end
+minetest.register_abm({
+	nodenames = {"default:gravel"},
+	neighbors = {"default:lava_source"},
+	interval = 3,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		default.gen_copper(pos, node, active_object_count, active_object_count_wider)
+	end,
+})
+minetest.register_abm({
+	nodenames = {"default:gravel"},
+	neighbors = {"default:lava_flowing"},
+	interval = 3,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		default.gen_copper(pos, node, active_object_count, active_object_count_wider)
 	end,
 })
 
@@ -196,9 +235,32 @@ minetest.register_craft({
 	}
 })
 
-
-
-
+--torchis
+minetest.register_craft({
+	output = '"blocs:torchis" 4',
+	recipe = {
+		{"default:papyrus"},
+		{"blocs:dirt_lump"},
+		{"bucket:bucket_water"},
+	},
+	replacements = {
+		{"bucket:bucket_water", "bucket:bucket_empty"}
+	},
+})
+minetest.register_node("blocs:torchis", {
+	description = "torchis",
+	tiles = {"torchis.png"},
+	is_ground_content = false,
+	walkable = true,
+	pointable = true,
+	diggable = true,
+	groups = {cracky=2,crumbly=3},
+	drop = "blocs:torchis",
+	sounds = ({
+		footstep = {name="poc", gain=0.25},
+		dug = {name="poc", gain=0.75},
+	}),
+})
 --charbon en cuissant du bois:
 minetest.register_craft({
 	type = "cooking",
@@ -329,3 +391,25 @@ minetest.register_craft({
 	}
 })
 ]]--
+
+
+--Fils mesecons avec le cuivre !
+minetest.register_craft({
+	type = "cooking",
+	output = "mesecons:wire_10100000_off 9",
+	recipe = "default:copper_ingot",
+})
+minetest.register_craft({
+	type = "cooking",
+	output = "mesecons:wire_10100000_off 81",
+	recipe = "default:copperblock",
+})
+
+--Seau avec les copper ingot
+minetest.register_craft({
+	output = 'bucket:bucket_empty',
+	recipe = {
+		{"default:copper_ingot","","default:copper_ingot"},
+		{"","default:copper_ingot",""},
+	}
+})
