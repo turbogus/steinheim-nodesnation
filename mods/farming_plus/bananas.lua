@@ -1,6 +1,5 @@
 -- main `S` code in init.lua
-local S
-S = farming.S
+local S = farming.S
 
 minetest.register_node("farming_plus:banana_sapling", {
 	description = S("Banana Tree Sapling"),
@@ -14,7 +13,8 @@ minetest.register_node("farming_plus:banana_sapling", {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0.35, 0.3}
 	},
-	groups = {dig_immediate=3,flammable=2},
+	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
+		attached_node = 1, sapling = 1},
 	sounds = default.node_sound_defaults(),
 })
 
@@ -50,7 +50,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	end
 	local tmp = {x=(maxp.x-minp.x)/2+minp.x, y=(maxp.y-minp.y)/2+minp.y, z=(maxp.z-minp.z)/2+minp.z}
 	local pos = minetest.find_node_near(tmp, maxp.x-minp.x, {"default:dirt_with_grass"})
-	if pos ~= nil then
+	if pos then
 		farming.generate_tree({x=pos.x, y=pos.y+1, z=pos.z}, "default:tree", "farming_plus:banana_leaves",  {"default:dirt", "default:dirt_with_grass"}, {["farming_plus:banana"]=10})
 	end
 end)
@@ -66,6 +66,6 @@ minetest.register_node("farming_plus:banana", {
 	walkable = false,
 	groups = {fleshy=3,dig_immediate=3,flammable=2,leafdecay=3,leafdecay_drop=1},
 	sounds = default.node_sound_defaults(),
-	
+
 	on_use = minetest.item_eat(6),
 })

@@ -1,5 +1,5 @@
-Minetest 0.4 mod: bones
-=======================
+Minetest Game mod: bones
+========================
 
 License of source code:
 -----------------------
@@ -14,4 +14,4 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 Authors of media files
 ----------------------
-Bad_Command_
+All textures: paramat

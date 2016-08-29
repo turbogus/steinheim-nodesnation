@@ -18,7 +18,7 @@ minetest.register_node("throwing:arrow_build_box", {
 			{7.5/17, -2.5/17, 2.5/17, 6.5/17, -1.5/17, 1.5/17},
 			{7.5/17, 2.5/17, -2.5/17, 6.5/17, 1.5/17, -1.5/17},
 			{6.5/17, -1.5/17, -1.5/17, 7.5/17, -2.5/17, -2.5/17},
-			
+
 			{7.5/17, 2.5/17, 2.5/17, 8.5/17, 3.5/17, 3.5/17},
 			{8.5/17, -3.5/17, 3.5/17, 7.5/17, -2.5/17, 2.5/17},
 			{8.5/17, 3.5/17, -3.5/17, 7.5/17, 2.5/17, -2.5/17},
@@ -38,53 +38,66 @@ local THROWING_ARROW_ENTITY={
 	lastpos={},
 	collisionbox = {0,0,0,0,0,0},
 	node = "",
+	player = "",
+	inventory = false,
+	stack = false,
+	bow_damage = 0,
 }
 
 THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 	self.timer=self.timer+dtime
-	local pos = self.object:getpos()
-	local node = minetest.get_node(pos)
-
-	if self.timer>0.2 then
-		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1)
-		for k, obj in pairs(objs) do
-			if obj:get_luaentity() ~= nil then
-				if obj:get_luaentity().name ~= "throwing:arrow_build_entity" and obj:get_luaentity().name ~= "__builtin:item" then
-					self.object:remove()
+	local newpos = self.object:getpos()
+	if self.lastpos.x ~= nil then
+		for _, pos in pairs(throwing_get_trajectoire(self, newpos)) do
+			local node = minetest.get_node(pos)
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1)
+			for k, obj in pairs(objs) do
+				if throwing_is_player(self.player, obj) or throwing_is_entity(obj) then
 					if self.inventory and self.stack and not minetest.setting_getbool("creative_mode") then
 						self.inventory:remove_item("main", {name=self.stack:get_name()})
 					end
 					if self.stack then
-						minetest.add_item(self.lastpos, {name=self.stack:get_name()})
+						minetest.add_item(pos, {name=self.stack:get_name()})
 					end
 					local toughness = 0.95
 					if math.random() < toughness then
-						minetest.add_item(self.lastpos, 'throwing:arrow_build')
+						minetest.add_item(pos, 'throwing:arrow_build')
 					else
-						minetest.add_item(self.lastpos, 'default:stick')
+						minetest.add_item(pos, 'default:stick')
+					end
+					self.object:remove()
+					return
+				end
+			end
+
+			if node.name ~= "air"
+			and not string.find(node.name, "water_")
+			and not (string.find(node.name, 'grass') and not string.find(node.name, 'dirt'))
+			and not (string.find(node.name, 'farming:') and not string.find(node.name, 'soil'))
+			and not string.find(node.name, 'flowers:')
+			and not string.find(node.name, 'fire:') then
+				if node.name ~= "ignore" and self.inventory and self.stack then
+					if not minetest.is_protected(self.lastpos, "")
+					and not string.find(node.name, "lava")
+					and not string.find(node.name, "torch")
+					and self.stack:get_definition().type == "node"
+					and self.stack:get_name() ~= "default:torch" then
+						minetest.place_node(self.lastpos, {name=self.stack:get_name()})
+					else
+						minetest.add_item(self.lastpos, {name=self.stack:get_name()})
+					end
+					if not minetest.setting_getbool("creative_mode") then
+						self.inventory:remove_item("main", {name=self.stack:get_name()})
 					end
 				end
+				minetest.add_item(self.lastpos, 'default:shovel_steel')
+				self.object:remove()
+				return
 			end
+			self.lastpos={x=pos.x, y=pos.y, z=pos.z}
 		end
 	end
-
-	if self.lastpos.x~=nil then
-		if node.name ~= "air" then
-			self.object:remove()
-			if self.inventory and self.stack and not minetest.setting_getbool("creative_mode") then
-					self.inventory:remove_item("main", {name=self.stack:get_name()})
-			end
-			if self.stack then
-				if not string.find(node.name, "water") and not string.find(node.name, "lava") and not string.find(node.name, "torch") and self.stack:get_definition().type == "node" and self.stack:get_name() ~= "default:torch" then
-					minetest.place_node(self.lastpos, {name=self.stack:get_name()})
-				else
-					minetest.add_item(self.lastpos, {name=self.stack:get_name()})
-				end
-			end
-			minetest.add_item(self.lastpos, 'default:shovel_steel')
-		end
-	end
-	self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+	self.lastpos={x=newpos.x, y=newpos.y, z=newpos.z}
 end
 
 minetest.register_entity("throwing:arrow_build_entity", THROWING_ARROW_ENTITY)

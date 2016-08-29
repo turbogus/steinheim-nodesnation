@@ -2,13 +2,14 @@ throwing_arrows = {
 	{"throwing:arrow_steel", "throwing:arrow_steel_entity"},
 	{"throwing:arrow_stone", "throwing:arrow_stone_entity"},
 	{"throwing:arrow_obsidian", "throwing:arrow_obsidian_entity"},
+	{"throwing:arrow_diamond", "throwing:arrow_diamond_entity"},
+	{"throwing:arrow_mithril", "throwing:arrow_mithril_entity"}, --MFF : Only for Hunters
 	{"throwing:arrow_fire", "throwing:arrow_fire_entity"},
 	{"throwing:arrow_teleport", "throwing:arrow_teleport_entity"},
 	{"throwing:arrow_dig", "throwing:arrow_dig_entity"},
 	{"throwing:arrow_build", "throwing:arrow_build_entity"},
 	{"throwing:arrow_tnt", "throwing:arrow_tnt_entity"},
 	{"throwing:arrow_torch", "throwing:arrow_torch_entity"},
-	{"throwing:arrow_diamond", "throwing:arrow_diamond_entity"},
 	{"throwing:arrow_shell", "throwing:arrow_shell_entity"},
 	{"throwing:arrow_fireworks_blue", "throwing:arrow_fireworks_blue_entity"},
 	{"throwing:arrow_fireworks_red", "throwing:arrow_fireworks_red_entity"},
@@ -27,7 +28,10 @@ dofile(minetest.get_modpath("throwing").."/functions.lua")
 
 dofile(minetest.get_modpath("throwing").."/tools.lua")
 
+dofile(minetest.get_modpath("throwing").."/crafts.lua")
+
 dofile(minetest.get_modpath("throwing").."/standard_arrows.lua")
+
 
 if minetest.get_modpath('fire') and minetest.get_modpath('bucket') and not DISABLE_FIRE_ARROW then
 	dofile(minetest.get_modpath("throwing").."/fire_arrow.lua")

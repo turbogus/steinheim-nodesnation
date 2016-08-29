@@ -11,7 +11,7 @@ local function read_file()
     	local t = f:read("*all")
     	f:close()
 	if t == "" or t == nil then return {} end
-	return minetest.deserialize(t)
+	return minetest.deserialize(t) or {}
 end
 
 local function write_file(tbl)
@@ -149,8 +149,8 @@ local entitydef_default = {
 	_remove_attached = function(self, index)
 		local master = self._attached_entities_master
 		local entity = self._attached_entities[index]
-		local ent = entity.entity
-		entity.entity = nil
+		local ent = entity and entity.entity
+		if entity then entity.entity = nil end
 		if index == master then
 			self:_detach_all()
 			local newmaster
@@ -251,6 +251,10 @@ end
 -- end
 
 function luaentity.add_entity(pos, name)
+	if not luaentity.entities then
+		minetest.after(0, luaentity.add_entity, vector.new(pos), name)
+		return
+	end
 	local index = luaentity.entities_index
 	while luaentity.entities[index] do
 		index = index + 1
@@ -311,10 +315,11 @@ minetest.register_globalstep(function(dtime)
 	end
 	for id, entity in pairs(luaentity.entities) do
 		local master = entity._attached_entities_master
-		if master then
-			local master_def = entity._attached_entities[master]
-			local master_entity = master_def.entity
-			entity._pos = vector.subtract(master_entity:getpos(), master_def.offset)
+		local master_def = master and entity._attached_entities[master]
+		local master_entity = master_def and master_def.entity
+		local master_entity_pos = master_entity and master_entity:getpos()
+		if master_entity_pos then
+			entity._pos = vector.subtract(master_entity_pos, master_def.offset)
 			entity._velocity = master_entity:getvelocity()
 			entity._acceleration = master_entity:getacceleration()
 		else
@@ -326,9 +331,21 @@ minetest.register_globalstep(function(dtime)
 				entity._velocity,
 				vector.multiply(entity._acceleration, dtime))
 		end
-		entity:_add_loaded()
-		if entity.on_step then
-			entity:on_step(dtime)
+		if master and not master_entity_pos then -- The entity has somehow been cleared
+			if pipeworks.delete_item_on_clearobject then
+				entity:remove()
+			else
+				entity:_remove_attached(master)
+				entity:_add_loaded()
+				if entity.on_step then
+					entity:on_step(dtime)
+				end
+			end
+		else
+			entity:_add_loaded()
+			if entity.on_step then
+				entity:on_step(dtime)
+			end
 		end
 	end
 end)

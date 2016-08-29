@@ -18,7 +18,7 @@ minetest.register_node("throwing:arrow_dig_box", {
 			{7.5/17, -2.5/17, 2.5/17, 6.5/17, -1.5/17, 1.5/17},
 			{7.5/17, 2.5/17, -2.5/17, 6.5/17, 1.5/17, -1.5/17},
 			{6.5/17, -1.5/17, -1.5/17, 7.5/17, -2.5/17, -2.5/17},
-			
+
 			{7.5/17, 2.5/17, 2.5/17, 8.5/17, 3.5/17, 3.5/17},
 			{8.5/17, -3.5/17, 3.5/17, 7.5/17, -2.5/17, 2.5/17},
 			{8.5/17, 3.5/17, -3.5/17, 7.5/17, 2.5/17, -2.5/17},
@@ -37,50 +37,59 @@ local THROWING_ARROW_ENTITY={
 	textures = {"throwing:arrow_dig_box"},
 	lastpos={},
 	collisionbox = {0,0,0,0,0,0},
+	player = "",
+	bow_damage = 0,
 }
 
-THROWING_ARROW_ENTITY.on_step = function(self, dtime)
-	self.timer=self.timer+dtime
-	local pos = self.object:getpos()
-	local node = minetest.get_node(pos)
 
-	if self.timer>0.2 then
-		local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1)
-		for k, obj in pairs(objs) do
-			if obj:get_luaentity() ~= nil then
-				if obj:get_luaentity().name ~= "throwing:arrow_dig_entity" and obj:get_luaentity().name ~= "__builtin:item" then
-					local damage = 1.5
-					obj:punch(self.object, 1.0, {
-						full_punch_interval=1.0,
-						damage_groups={fleshy=damage},
-					}, nil)
-					self.object:remove()
-					local toughness = 0.9
-					if math.random() < toughness then
-						minetest.add_item(self.lastpos, 'throwing:arrow_dig')
-					else
-						minetest.add_item(self.lastpos, 'default:stick')
+THROWING_ARROW_ENTITY.on_step = function(self, dtime)
+	local newpos = self.object:getpos()
+	if self.lastpos.x ~= nil then
+		for _, pos in pairs(throwing_get_trajectoire(self, newpos)) do
+			local node = minetest.get_node(pos)
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1)
+			for k, obj in pairs(objs) do
+				if throwing_is_player(self.player, obj) or throwing_is_entity(obj) then
+					if throwing_touch(pos, obj:getpos()) then
+						local puncher = self.object
+						if self.player and minetest.get_player_by_name(self.player) then
+							puncher = minetest.get_player_by_name(self.player)
+						end
+						local damage = 1.5
+						if self.bow_damage and self.bow_damage > 0 then
+							damage = damage + (self.bow_damage/12)
+						end
+						obj:punch(puncher, 1.0, {
+							full_punch_interval=1.0,
+							damage_groups={fleshy=damage},
+						}, nil)
+						if math.random(0,100) % 2 == 0 then -- 50% of chance to drop //MFF (Mg|07/27/15)
+							minetest.add_item(pos, "throwing:arrow_dig")
+						end
+						self.object:remove()
+						return
 					end
 				end
 			end
+			if node.name ~= "air"
+			and not string.find(node.name, "water_")
+			and not (string.find(node.name, 'grass') and not string.find(node.name, 'dirt'))
+			and not (string.find(node.name, 'farming:') and not string.find(node.name, 'soil'))
+			and not string.find(node.name, 'flowers:')
+			and not string.find(node.name, 'fire:') then
+				if node.name ~= "ignore" and minetest.get_item_group(node.name, "unbreakable") == 0
+					and not minetest.is_protected(pos, self.player)
+					and node.diggable ~= false then
+					minetest.set_node(pos, {name = "air"})
+					minetest.add_item(pos, node.name)
+				end
+				self.object:remove()
+				return
+			end
+			self.lastpos={x=pos.x, y=pos.y, z=pos.z}
 		end
 	end
-
-	if self.lastpos.x~=nil then
-		if node.name ~= "air" then
-			self.object:remove()
-			if node.diggable ~= false then
-				minetest.dig_node(pos)
-			end
-			local toughness = 0.65
-			if math.random() < toughness then
-				minetest.add_item(self.lastpos, 'default:pick_steel')
-			else
-				minetest.add_item(self.lastpos, 'default:stick')
-			end
-		end
-	end
-	self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+	self.lastpos={x=newpos.x, y=newpos.y, z=newpos.z}
 end
 
 minetest.register_entity("throwing:arrow_dig_entity", THROWING_ARROW_ENTITY)

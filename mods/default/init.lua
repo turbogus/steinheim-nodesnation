@@ -30,10 +30,13 @@ default.gui_survival_form = "size[8,8.5]"..
 			"list[current_player;craft;1.75,0.5;3,3;]"..
 			"list[current_player;craftpreview;5.75,1.5;1,1;]"..
 			"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
+			"listring[current_player;main]"..
+			"listring[current_player;craft]"..
 			default.get_hotbar_bg(0,4.25)
 
 -- Load files
 dofile(minetest.get_modpath("default").."/functions.lua")
+dofile(minetest.get_modpath("default").."/trees.lua")
 dofile(minetest.get_modpath("default").."/nodes.lua")
 dofile(minetest.get_modpath("default").."/furnace.lua")
 dofile(minetest.get_modpath("default").."/tools.lua")
@@ -41,6 +44,5 @@ dofile(minetest.get_modpath("default").."/craftitems.lua")
 dofile(minetest.get_modpath("default").."/crafting.lua")
 dofile(minetest.get_modpath("default").."/mapgen.lua")
 dofile(minetest.get_modpath("default").."/player.lua")
-dofile(minetest.get_modpath("default").."/trees.lua")
 dofile(minetest.get_modpath("default").."/aliases.lua")
 dofile(minetest.get_modpath("default").."/legacy.lua")

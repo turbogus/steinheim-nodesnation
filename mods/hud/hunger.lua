@@ -337,10 +337,17 @@ function hud.handle_node_actions(pos, oldnode, player, ext)
 	if exhaus > HUD_HUNGER_EXHAUST_LVL then
 		exhaus = 0
 		local h = tonumber(hud.hunger[name])
-		h = h - 1
-		if h < 0 then h = 0 end
-		hud.hunger[name] = h
-		hud.set_hunger(player)
+
+		-- Ajout par bibi
+		if h ~= nil then
+			h = h - 1
+			if h < 0 then 
+				h = 0 
+			end
+			hud.hunger[name] = h
+			hud.set_hunger(player)
+		end
+		
 	end
 	hud.exhaustion[name] = exhaus
 end

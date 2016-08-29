@@ -1,4 +1,4 @@
-Minetest 0.4 mod: default
+Minetest Game mod: default
 ==========================
 
 License of source code:
@@ -24,11 +24,9 @@ Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>
 
 Cisoun's WTFPL texture pack:
   default_jungletree.png
-  default_jungletree_top.png
   default_lava.png
   default_leaves.png
   default_sapling.png
-  default_sign_wall.png
   default_stone.png
   default_tree.png
   default_tree_top.png
@@ -53,16 +51,11 @@ RealBadAngel's animated water (WTFPL):
   default_water_flowing_animated.png
 
 VanessaE (WTFPL):
-  default_nc_back.png
-  default_nc_front.png
-  default_nc_rb.png
-  default_nc_side.png
-  default_grass_*.png
   default_desert_sand.png
   default_desert_stone.png
-  default_desert_stone_brick.png
   default_sand.png
-  default_sandstone_brick.png
+  default_mese_crystal.png
+  default_mese_crystal_fragment.png
 
 Calinou (CC BY-SA):
   default_brick.png
@@ -79,7 +72,6 @@ Jordach (CC BY-SA 3.0):
 PilzAdam (WTFPL):
   default_jungleleaves.png
   default_junglesapling.png
-  default_junglewood.png
   default_obsidian_glass.png
   default_obsidian_shard.png
   default_mineral_gold.png
@@ -93,8 +85,6 @@ InfinityProject (WTFPL):
 
 Splizard (CC BY-SA 3.0):
   default_snow.png
-  default_snow_side.png
-  default_ice.png
   default_pine_sapling.png
 
 Zeg9 (CC BY-SA 3.0):
@@ -105,23 +95,46 @@ Zeg9 (CC BY-SA 3.0):
   default_gold_block.png
 
 paramat (CC BY-SA 3.0):
-  wieldhand.png, based on character.png by Jordach (CC BY-SA 3.0)
+  wieldhand.png -- Copied from character.png by Jordach (CC BY-SA 3.0)
   default_pinetree.png
   default_pinetree_top.png
   default_pinewood.png
+  default_acacia_leaves.png
+  default_acacia_sapling.png
+  default_acacia_tree.png
+  default_acacia_tree_top.png
+  default_acacia_wood.png
+  default_junglewood.png
+  default_jungletree_top.png
+  default_sandstone_brick.png
+  default_obsidian_brick.png
+  default_stone_brick.png
+  default_desert_stone_brick.png
+  default_sandstone_block.png
+  default_obsidian_block.png
+  default_stone_block.png
+  default_desert_stone_block.png
+  default_river_water.png
+  default_river_water_source_animated.png
+  default_river_water_flowing_animated.png
+  default_dry_grass.png
+  default_dry_grass_side.png
+  default_dry_grass_*.png
+  default_grass.png
+  default_grass_side.png
+  default_snow_side.png
+  default_mese_block.png
 
 brunob.santos (CC BY-SA 4.0):
   default_desert_cobble.png
 
 BlockMen (CC BY-SA 3.0):
-  default_stone_brick.png
   default_wood.png
   default_clay_brick.png
   default_iron_ingot.png
   default_gold_ingot.png
   default_tool_steelsword.png
   default_diamond.png
-  default_diamond_block.png
   default_book.png
   default_tool_*.png
   default_lava_source_animated.png
@@ -131,9 +144,21 @@ BlockMen (CC BY-SA 3.0):
   default_chest_lock.png
   default_chest_side.png
   default_chest_top.png
+  default_mineral_mese.png
+  default_meselamp.png
   bubble.png
-  heart.png
   gui_*.png
+
+sofar (CC BY-SA 3.0):
+  default_book_written.png, based on default_book.png
+  default_aspen_sapling
+  default_aspen_leaves
+  default_aspen_tree
+  default_aspen_tree_top, derived from default_pine_tree_top (by paramat)
+  default_aspen_wood, derived from default_pine_wood (by paramat)
+
+sofar (WTFPL):
+  default_gravel.png -- Derived from Gambit's PixelBOX texture pack light gravel
 
 Neuromancer (CC BY-SA 2.0):
   default_cobble.png, based on texture by Brane praefect
@@ -142,9 +167,26 @@ Neuromancer (CC BY-SA 3.0):
   default_dirt.png
   default_furnace_*.png
 
-Philipbenr (CC BY-SA 3.0):
-  default_grass.png
-  default_grass_side.png
+Gambit (WTFPL):
+  default_bronze_ingot.png
+  default_copper_ingot.png
+  default_copper_lump.png
+  default_iron_lump.png
+  default_gold_lump.png
+  default_clay_lump.png
+  default_coal.png
+  default_grass_*.png
+  default_paper.png
+  default_diamond_block.png
+  default_ladder_steel.png
+  default_sign_wall_wood.png
+  default_flint.png
+
+asl97 (WTFPL):
+  default_ice.png
+
+KevDoy (CC BY-SA 3.0)
+  heart.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
@@ -185,14 +227,3 @@ Mito551 (sounds) (CC BY-SA):
   default_dirt_footstep.1.ogg
   default_dirt_footstep.2.ogg
   default_glass_footstep.ogg
-
-Gambit (WTFPL):
-  default_bronze_ingot.png
-  default_copper_ingot.png
-  default_copper_lump.png
-  default_iron_lump.png
-  default_gold_lump.png
-  default_clay_lump.png
-  default_coal.png
-  default_grass_*.png
-  default_paper.png

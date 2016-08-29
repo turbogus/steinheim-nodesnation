@@ -44,7 +44,8 @@ mobs:register_mob("mobs:chicken", {
 	},
 	follow = "farming:seed_wheat",
 	view_range = 5,
-	replace_rate = 4000,
+	--replace_rate = 4000,
+	replace_rate = 400,
 	replace_what = {"air"},
 	replace_with = "mobs:egg",
 	on_rightclick = function(self, clicker)
