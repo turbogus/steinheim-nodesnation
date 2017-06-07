@@ -1,3 +1,0 @@
-name = "turbogus",
-author = "turbogus",
-description = "The big boss of Steinheim",

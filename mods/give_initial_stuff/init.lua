@@ -1,6 +1,6 @@
 local stuff_string = minetest.setting_get("initial_stuff") or
-		"default:pick_steel,default:axe_steel,default:shovel_steel," ..
-		"default:torch 99,default:cobble 99"
+		"default:sword_steel,default:torch 9,default:apple 9," ..
+		"farming:bread 3,craftguide:book"
 
 give_initial_stuff = {
 	items = {}

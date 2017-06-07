@@ -1,23 +1,39 @@
-Minetest mod: boost_cart
-=======================
+ Minetest mod: boost_cart
+==========================
 Based on (and fully compatible with) the mod "carts" by PilzAdam
-Target: Run smoothly and do not use too much CPU
+Also compatible with the carts mod in the subgame "minetest_game".
+Target: Run smoothly as possible even on laggy server
 
-License of source code:
------------------------
-WTFPL
 
-License of media (textures, sounds and models):
------------------------------------------------
-CC-0
+ Features
+----------
+- A fast cart for your railway or roller coaster (up to 10 m/s!)
+- Boost and brake rails
+- By mesecons controlled Start-Stop rails
+- Detector rails that send a mesecons signal when the cart drives over them
+- Rail junction switching with the 'right-left' walking keys
+- Handbrake with the 'back' key
 
-Authors of media files:
------------------------
-kddekadenz:
-  cart_bottom.png
-  cart_side.png
-  cart_top.png
 
-Zeg9:
-  cart.x
-  cart.png
+ License for everything
+------------------------
+CC-0, if not specified otherwise below
+
+
+ Authors
+---------
+Various authors
+	carts_rail_*.png
+
+kddekadenz
+	cart_bottom.png
+	cart_side.png
+	cart_top.png
+
+klankbeeld (CC-BY 3.0)
+	http://freesound.org/people/klankbeeld/sounds/174042/
+	cart_rail.*.ogg
+
+Zeg9
+	cart.x
+	cart.png

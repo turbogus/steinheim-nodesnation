@@ -1,3 +1,0 @@
-name = "minos",
-author = "minos",
-description = "minos player texture",

@@ -99,7 +99,7 @@ local function destroy(drops, npos, cid, c_air, c_fire, on_blast_queue, ignore_p
 		return c_fire
 	else
 		local node_drops = minetest.get_node_drops(def.name, "")
-		for _, item in ipairs(node_drops) do
+		for _, item in pairs(node_drops) do
 			add_drop(drops, item)
 		end
 		return c_air
@@ -181,7 +181,7 @@ local function entity_physics(pos, radius, drops)
 					}, nil)
 				end
 			end
-			for _, item in ipairs(entity_drops) do
+			for _, item in pairs(entity_drops) do
 				add_drop(drops, item)
 			end
 		end
@@ -248,8 +248,8 @@ local function add_effects(pos, radius, drops)
 	})
 end
 
-function tnt.burn(pos)
-	local name = minetest.get_node(pos).name
+function tnt.burn(pos, nodename)
+	local name = nodename or minetest.get_node(pos).name
 	local group = minetest.get_item_group(name, "tnt")
 	if group > 0 then
 		minetest.sound_play("tnt_ignite", {pos = pos})
@@ -332,25 +332,26 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast)
 	vm:update_map()
 	vm:update_liquids()
 
-	-- call nodeupdate for everything within 1.5x blast radius
+	-- call check_single_for_falling for everything within 1.5x blast radius
+	for y = -radius * 1.5, radius * 1.5 do
 	for z = -radius * 1.5, radius * 1.5 do
 	for x = -radius * 1.5, radius * 1.5 do
-	for y = -radius * 1.5, radius * 1.5 do
-		local s = vector.add(pos, {x = x, y = y, z = z})
-		local r = vector.distance(pos, s)
+		local rad = {x = x, y = y, z = z}
+		local s = vector.add(pos, rad)
+		local r = vector.length(rad)
 		if r / radius < 1.4 then
-			nodeupdate(s)
+			minetest.check_single_for_falling(s)
 		end
 	end
 	end
 	end
 
-	for _, queued_data in ipairs(on_blast_queue) do
+	for _, queued_data in pairs(on_blast_queue) do
 		local dist = math.max(1, vector.distance(queued_data.pos, pos))
 		local intensity = (radius * radius) / (dist * dist)
 		local node_drops = queued_data.on_blast(queued_data.pos, intensity)
 		if node_drops then
-			for _, item in ipairs(node_drops) do
+			for _, item in pairs(node_drops) do
 				add_drop(drops, item)
 			end
 		end
@@ -403,16 +404,23 @@ minetest.register_node("tnt:gunpowder", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {dig_immediate = 2, attached_node = 1, connect_to_raillike = minetest.raillike_group("gunpowder")},
+	groups = {dig_immediate = 2, attached_node = 1, flammable = 5,
+		connect_to_raillike = minetest.raillike_group("gunpowder")},
 	sounds = default.node_sound_leaves_defaults(),
 
 	on_punch = function(pos, node, puncher)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
-			tnt.burn(pos)
+			minetest.set_node(pos, {name = "tnt:gunpowder_burning"})
 		end
 	end,
 	on_blast = function(pos, intensity)
-		tnt.burn(pos)
+		minetest.set_node(pos, {name = "tnt:gunpowder_burning"})
+	end,
+	on_burn = function(pos)
+		minetest.set_node(pos, {name = "tnt:gunpowder_burning"})
+	end,
+	on_ignite = function(pos, igniter)
+		minetest.set_node(pos, {name = "tnt:gunpowder_burning"})
 	end,
 })
 
@@ -511,7 +519,9 @@ if enable_tnt then
 		neighbors = {"fire:basic_flame", "default:lava_source", "default:lava_flowing"},
 		interval = 4,
 		chance = 1,
-		action = tnt.burn,
+		action = function(pos, node)
+			tnt.burn(pos, node.name)
+		end,
 	})
 end
 
@@ -535,7 +545,7 @@ function tnt.register_tnt(def)
 			description = def.description,
 			tiles = {tnt_top, tnt_bottom, tnt_side},
 			is_ground_content = false,
-			groups = {dig_immediate = 2, mesecon = 2, tnt = 1},
+			groups = {dig_immediate = 2, mesecon = 2, tnt = 1, flammable = 5},
 			sounds = default.node_sound_wood_defaults(),
 			on_punch = function(pos, node, puncher)
 				if puncher:get_wielded_item():get_name() == "default:torch" then
@@ -554,6 +564,12 @@ function tnt.register_tnt(def)
 					end
 				}
 			},
+			on_burn = function(pos)
+				minetest.set_node(pos, {name = name .. "_burning"})
+			end,
+			on_ignite = function(pos, igniter)
+				minetest.set_node(pos, {name = name .. "_burning"})
+			end,
 		})
 	end
 
@@ -582,7 +598,7 @@ function tnt.register_tnt(def)
 		on_construct = function(pos)
 			minetest.sound_play("tnt_ignite", {pos = pos})
 			minetest.get_node_timer(pos):start(4)
-			nodeupdate(pos)
+			minetest.check_for_falling(pos)
 		end,
 	})
 end

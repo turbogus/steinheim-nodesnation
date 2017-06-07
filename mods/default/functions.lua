@@ -18,7 +18,7 @@ end
 function default.node_sound_stone_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_hard_footstep", gain = 0.5}
+			{name = "default_hard_footstep", gain = 0.3}
 	table.dug = table.dug or
 			{name = "default_hard_footstep", gain = 1.0}
 	default.node_sound_defaults(table)
@@ -28,9 +28,9 @@ end
 function default.node_sound_dirt_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_dirt_footstep", gain = 1.0}
+			{name = "default_dirt_footstep", gain = 0.4}
 	table.dug = table.dug or
-			{name = "default_dirt_footstep", gain = 1.5}
+			{name = "default_dirt_footstep", gain = 1.0}
 	table.place = table.place or
 			{name = "default_place_node", gain = 1.0}
 	default.node_sound_defaults(table)
@@ -52,7 +52,7 @@ end
 function default.node_sound_gravel_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_gravel_footstep", gain = 0.5}
+			{name = "default_gravel_footstep", gain = 0.4}
 	table.dug = table.dug or
 			{name = "default_gravel_footstep", gain = 1.0}
 	table.place = table.place or
@@ -64,7 +64,7 @@ end
 function default.node_sound_wood_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_wood_footstep", gain = 0.5}
+			{name = "default_wood_footstep", gain = 0.3}
 	table.dug = table.dug or
 			{name = "default_wood_footstep", gain = 1.0}
 	default.node_sound_defaults(table)
@@ -74,7 +74,7 @@ end
 function default.node_sound_leaves_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_grass_footstep", gain = 0.35}
+			{name = "default_grass_footstep", gain = 0.45}
 	table.dug = table.dug or
 			{name = "default_grass_footstep", gain = 0.7}
 	table.dig = table.dig or
@@ -88,6 +88,8 @@ end
 function default.node_sound_glass_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
+			{name = "default_glass_footstep", gain = 0.3}
+	table.dig = table.dig or
 			{name = "default_glass_footstep", gain = 0.5}
 	table.dug = table.dug or
 			{name = "default_break_glass", gain = 1.0}
@@ -95,6 +97,27 @@ function default.node_sound_glass_defaults(table)
 	return table
 end
 
+function default.node_sound_metal_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name = "default_metal_footstep", gain = 0.4}
+	table.dig = table.dig or
+			{name = "default_dig_metal", gain = 0.5}
+	table.dug = table.dug or
+			{name = "default_dug_metal", gain = 0.5}
+	table.place = table.place or
+			{name = "default_place_node_metal", gain = 0.5}
+	default.node_sound_defaults(table)
+	return table
+end
+
+function default.node_sound_water_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name = "default_water_footstep", gain = 0.2}
+	default.node_sound_defaults(table)
+	return table
+end
 
 --
 -- Lavacooling
@@ -113,7 +136,7 @@ end
 minetest.register_abm({
 	label = "Lava cooling",
 	nodenames = {"default:lava_source", "default:lava_flowing"},
-	neighbors = {"group:water"},
+	neighbors = {"group:cools_lava", "group:water"},
 	interval = 1,
 	chance = 1,
 	catch_up = false,
@@ -335,7 +358,7 @@ minetest.register_abm({
 		end
 		-- Remove node
 		minetest.remove_node(pos)
-		nodeupdate(pos)
+		minetest.check_for_falling(pos)
 	end
 })
 
@@ -348,47 +371,36 @@ minetest.register_abm({
 	label = "Grass spread",
 	nodenames = {"default:dirt"},
 	neighbors = {
-		"default:dirt_with_grass",
-		"default:dirt_with_dry_grass",
-		"default:dirt_with_snow",
+		"air",
 		"group:grass",
 		"group:dry_grass",
 		"default:snow",
 	},
 	interval = 6,
-	chance = 67,
+	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
-		-- Most likely case, half the time it's too dark for this.
+		-- Check for darkness: night, shadow or under a light-blocking node
+		-- Returns if ignore above
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 		if (minetest.get_node_light(above) or 0) < 13 then
 			return
 		end
 
-		-- Look for likely neighbors.
-		local p2 = minetest.find_node_near(pos, 1, {"default:dirt_with_grass",
-				"default:dirt_with_dry_grass", "default:dirt_with_snow"})
+		-- Look for spreading dirt-type neighbours
+		local p2 = minetest.find_node_near(pos, 1, "group:spreading_dirt_type")
 		if p2 then
-			-- But the node needs to be under air in this case.
-			local n2 = minetest.get_node(above)
-			if n2 and n2.name == "air" then
-				local n3 = minetest.get_node(p2)
-				minetest.set_node(pos, {name = n3.name})
-				return
-			end
-		end
-
-		-- Anything on top?
-		local n2 = minetest.get_node(above)
-		if not n2 then
+			local n3 = minetest.get_node(p2)
+			minetest.set_node(pos, {name = n3.name})
 			return
 		end
 
-		local name = n2.name
-		-- Snow check is cheapest, so comes first.
+		-- Else, any seeding nodes on top?
+		local name = minetest.get_node(above).name
+		-- Snow check is cheapest, so comes first
 		if name == "default:snow" then
 			minetest.set_node(pos, {name = "default:dirt_with_snow"})
-		-- Most likely case first.
+		-- Most likely case first
 		elseif minetest.get_item_group(name, "grass") ~= 0 then
 			minetest.set_node(pos, {name = "default:dirt_with_grass"})
 		elseif minetest.get_item_group(name, "dry_grass") ~= 0 then
@@ -404,11 +416,7 @@ minetest.register_abm({
 
 minetest.register_abm({
 	label = "Grass covered",
-	nodenames = {
-		"default:dirt_with_grass",
-		"default:dirt_with_dry_grass",
-		"default:dirt_with_snow",
-	},
+	nodenames = {"group:spreading_dirt_type"},
 	interval = 8,
 	chance = 50,
 	catch_up = false,
@@ -431,7 +439,7 @@ minetest.register_abm({
 
 minetest.register_abm({
 	label = "Moss growth",
-	nodenames = {"default:cobble", "stairs:slab_cobble", "stairs:stair_cobble"},
+	nodenames = {"default:cobble", "stairs:slab_cobble", "stairs:stair_cobble", "walls:cobble"},
 	neighbors = {"group:water"},
 	interval = 16,
 	chance = 200,
@@ -443,6 +451,8 @@ minetest.register_abm({
 			minetest.set_node(pos, {name = "stairs:slab_mossycobble", param2 = node.param2})
 		elseif node.name == "stairs:stair_cobble" then
 			minetest.set_node(pos, {name = "stairs:stair_mossycobble", param2 = node.param2})
+		elseif node.name == "walls:cobble" then
+			minetest.set_node(pos, {name = "walls:mossycobble", param2 = node.param2})
 		end
 	end
 })
@@ -486,3 +496,19 @@ function default.intersects_protection(minp, maxp, player_name, interval)
 
 	return false
 end
+
+
+--
+-- Coral death near air
+--
+
+minetest.register_abm({
+	nodenames = {"default:coral_brown", "default:coral_orange"},
+	neighbors = {"air"},
+	interval = 17,
+	chance = 5,
+	catch_up = false,
+	action = function(pos, node)
+		minetest.set_node(pos, {name = "default:coral_skeleton"})
+	end,
+})

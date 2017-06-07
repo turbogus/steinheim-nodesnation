@@ -195,25 +195,27 @@ minetest.register_abm({
 			local meta2 = minetest.get_meta({x=pos.x,y=pos.y+1,z=pos.z});
 			local inv2 = meta2:get_inventory()
 			local invsize2 = inv2:get_size("dst")
-			if inv2:is_empty("dst") == false then
+			if inv2:is_empty("dst") == true then
+				--print("furnace is empty")
+				return
+			end
 		
-				for i = 1,invsize2 do
-					local stack = inv2:get_stack("dst", i)
-					local item = stack:get_name()
-					if item ~= "" then
-						if inv:room_for_item("main", item) == false then
-							--print("no room for items")
-							return
-						end
-						--print(stack:to_string())
-						stack:take_item(1)
-						inv2:set_stack("dst", i, stack)
-						--add to hopper
-						--print("adding item")
-						inv:add_item("main", item)
-						break
-					
+			for i = 1,invsize2 do
+				local stack = inv2:get_stack("dst", i)
+				local item = stack:get_name()
+				if item ~= "" then
+					if inv:room_for_item("main", item) == false then
+						--print("no room for items")
+						return
 					end
+					--print(stack:to_string())
+					stack:take_item(1)
+					inv2:set_stack("dst", i, stack)
+					--add to hopper
+					--print("adding item")
+					inv:add_item("main", item)
+					break
+					
 				end
 			end
 		end
@@ -360,24 +362,27 @@ minetest.register_abm({
 			local meta2 = minetest.get_meta({x=pos.x,y=pos.y+1,z=pos.z});
 			local inv2 = meta2:get_inventory()
 			local invsize2 = inv2:get_size("dst")
-			if inv2:is_empty("dst") == false then
-				for i = 1,invsize2 do
-					local stack = inv2:get_stack("dst", i)
-					local item = stack:get_name()
-					if item ~= "" then
-						if inv:room_for_item("main", item) == false then
-							--print("no room for items")
-							return
-						end
-						--print(stack:to_string())
-						stack:take_item(1)
-						inv2:set_stack("dst", i, stack)
-						--add to hopper
-						--print("adding item")
-						inv:add_item("main", item)
-						break
-					
+			if inv2:is_empty("dst") == true then
+				--print("furnace is empty")
+				return
+			end
+		
+			for i = 1,invsize2 do
+				local stack = inv2:get_stack("dst", i)
+				local item = stack:get_name()
+				if item ~= "" then
+					if inv:room_for_item("main", item) == false then
+						--print("no room for items")
+						return
 					end
+					--print(stack:to_string())
+					stack:take_item(1)
+					inv2:set_stack("dst", i, stack)
+					--add to hopper
+					--print("adding item")
+					inv:add_item("main", item)
+					break
+					
 				end
 			end
 		end

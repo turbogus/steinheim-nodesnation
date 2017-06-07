@@ -32,15 +32,15 @@ local function unwatching(name)
 			minetest.set_player_privs(name, privs)
 		end
 
-		if original_pos[watcher] then
+		local pos = original_pos[watcher]
+		if pos then
+			-- setpos seems to be very unreliable
+			-- this workaround helps though
 			minetest.after(0.1, function()
-				watcher:setpos(original_pos[watcher])
+				watcher:setpos(pos)
 			end)
+			original_pos[watcher] = nil
 		end
-
-		minetest.after(0.2, function()
-			original_pos[watcher] = {}
-		end)
 	end
 end
 
@@ -50,7 +50,7 @@ minetest.register_chatcommand("watch", {
 	privs = {watch=true},
 	func = function(name, param)
 		local watcher = minetest.get_player_by_name(name)
-		local target = minetest.get_player_by_name(param:match("^([^ ]+)$"))
+		local target = minetest.get_player_by_name(param)
 		local privs = minetest.get_player_privs(name)
 
 		if target and watcher ~= target then

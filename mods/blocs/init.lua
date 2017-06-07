@@ -307,7 +307,7 @@ minetest.register_on_punchnode(function(p, node, player)
 end)
 
 -- Récupération aléatoire de pine sapling dans la terre
-minetest.override_item("default:dirt", {
+--[[minetest.override_item("default:dirt", {
 	drop = {
 		max_items = 2,
 		items = {
@@ -335,7 +335,7 @@ minetest.override_item("default:dirt_with_grass", {
 			}
 		}
 	}
-})
+})]]--
 
 --craft des npcfs
 
@@ -413,3 +413,21 @@ minetest.register_craft({
 		{"","default:copper_ingot",""},
 	}
 })
+
+
+--Le 31/12/2016: alias pour virer les xdecor_tiles !!!!!
+minetest.register_alias("xdecor:stone_tile", "moreblocks:stone_tile")
+minetest.register_alias("xdecor:stone_tiles", "moreblocks:stone_tile")
+minetest.register_alias("xdecor:wood_tiles", "xdecor:wood_tile")
+
+--Le 15/01/2017: craft pour virer un autre probleme de xdecor !!!!
+minetest.register_craft({
+	output = 'moreblocks:split_stone_tile',
+	recipe = {
+		{"xdecor:stone_tile"},
+	}
+})
+
+--alias pour virer les soucis de rail!
+minetest.register_alias("default:rail", "carts:rail")
+

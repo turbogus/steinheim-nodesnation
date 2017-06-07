@@ -1,5 +1,6 @@
 -- main `S` code in init.lua
-local S = farming.S
+local S
+S = farming.S
 
 minetest.register_node("farming_plus:cocoa_sapling", {
 	description = S("Cocoa Tree Sapling"),
@@ -13,8 +14,7 @@ minetest.register_node("farming_plus:cocoa_sapling", {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0.35, 0.3}
 	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
+	groups = {dig_immediate=3,flammable=2},
 	sounds = default.node_sound_defaults(),
 })
 

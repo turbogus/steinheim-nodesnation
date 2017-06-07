@@ -1,11 +1,3 @@
---[[
-
-Copyright (C) 2012 PilzAdam
-  modified by BlockMen (added sounds, glassdoors[glass, obsidian glass], trapdoor)
-Copyright (C) 2015 - Auke Kok <sofar@foo-projects.org>
-
---]]
-
 -- our API object
 doors = {}
 
@@ -148,8 +140,17 @@ function _doors.door_toggle(pos, node, clicker)
 	end
 
 	if clicker and not minetest.check_player_privs(clicker, "protection_bypass") then
+		-- is player wielding the right key?
+		local item = clicker:get_wielded_item()
 		local owner = meta:get_string("doors_owner")
-		if owner ~= "" then
+		if item:get_name() == "default:key" then
+			local key_meta = minetest.parse_json(item:get_metadata())
+			local secret = meta:get_string("key_lock_secret")
+			if secret ~= key_meta.secret then
+				return false
+			end
+
+		elseif owner ~= "" then
 			if clicker:get_player_name() ~= owner then
 				return false
 			end
@@ -372,13 +373,37 @@ function doors.register(name, def)
 	end
 	def.after_dig_node = function(pos, node, meta, digger)
 		minetest.remove_node({x = pos.x, y = pos.y + 1, z = pos.z})
-		nodeupdate({x = pos.x, y = pos.y + 1, z = pos.z})
+		minetest.check_for_falling({x = pos.x, y = pos.y + 1, z = pos.z})
 	end
-	def.on_rotate = screwdriver and screwdriver.rotate_simple or false
+	def.on_rotate = false
 
 	if def.protected then
 		def.can_dig = can_dig_door
 		def.on_blast = function() end
+		def.on_key_use = function(pos, player)
+			local door = doors.get(pos)
+			door:toggle(player)
+		end
+		def.on_skeleton_key_use = function(pos, player, newsecret)
+			local meta = minetest.get_meta(pos)
+			local owner = meta:get_string("doors_owner")
+			local pname = player:get_player_name()
+
+			-- verify placer is owner of lockable door
+			if owner ~= pname then
+				minetest.record_protection_violation(pos, pname)
+				minetest.chat_send_player(pname, "You do not own this locked door.")
+				return nil
+			end
+
+			local secret = meta:get_string("key_lock_secret")
+			if secret == "" then
+				secret = newsecret
+				meta:set_string("key_lock_secret", secret)
+			end
+
+			return secret, "a locked door", owner
+		end
 	else
 		def.on_blast = function(pos, intensity)
 			minetest.remove_node(pos)
@@ -430,7 +455,7 @@ doors.register("door_steel", {
 		inventory_image = "doors_item_steel.png",
 		protected = true,
 		groups = {cracky = 1, level = 2},
-		sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_metal_defaults(),
 		sound_open = "doors_steel_door_open",
 		sound_close = "doors_steel_door_close",
 		recipe = {
@@ -499,9 +524,18 @@ end
 function _doors.trapdoor_toggle(pos, node, clicker)
 	node = node or minetest.get_node(pos)
 	if clicker and not minetest.check_player_privs(clicker, "protection_bypass") then
+		-- is player wielding the right key?
+		local item = clicker:get_wielded_item()
 		local meta = minetest.get_meta(pos)
 		local owner = meta:get_string("doors_owner")
-		if owner ~= "" then
+		if item:get_name() == "default:key" then
+			local key_meta = minetest.parse_json(item:get_metadata())
+			local secret = meta:get_string("key_lock_secret")
+			if secret ~= key_meta.secret then
+				return false
+			end
+
+		elseif owner ~= "" then
 			if clicker:get_player_name() ~= owner then
 				return false
 			end
@@ -527,7 +561,7 @@ function doors.register_trapdoor(name, def)
 	if not name:find(":") then
 		name = "doors:" .. name
 	end
-	
+
 	local name_closed = name
 	local name_opened = name.."_open"
 
@@ -554,6 +588,30 @@ function doors.register_trapdoor(name, def)
 		end
 
 		def.on_blast = function() end
+		def.on_key_use = function(pos, player)
+			local door = doors.get(pos)
+			door:toggle(player)
+		end
+		def.on_skeleton_key_use = function(pos, player, newsecret)
+			local meta = minetest.get_meta(pos)
+			local owner = meta:get_string("doors_owner")
+			local pname = player:get_player_name()
+
+			-- verify placer is owner of lockable door
+			if owner ~= pname then
+				minetest.record_protection_violation(pos, pname)
+				minetest.chat_send_player(pname, "You do not own this trapdoor.")
+				return nil
+			end
+
+			local secret = meta:get_string("key_lock_secret")
+			if secret == "" then
+				secret = newsecret
+				meta:set_string("key_lock_secret", secret)
+			end
+
+			return secret, "a locked trapdoor", owner
+		end
 	else
 		def.on_blast = function(pos, intensity)
 			minetest.remove_node(pos)
@@ -629,7 +687,7 @@ doors.register_trapdoor("doors:trapdoor_steel", {
 	tile_front = "doors_trapdoor_steel.png",
 	tile_side = "doors_trapdoor_steel_side.png",
 	protected = true,
-	sounds = default.node_sound_stone_defaults(),
+	sounds = default.node_sound_metal_defaults(),
 	sound_open = "doors_steel_door_open",
 	sound_close = "doors_steel_door_close",
 	groups = {cracky = 1, level = 2, door = 1},
@@ -704,7 +762,7 @@ function doors.register_fencegate(name, def)
 	fence_open.collision_box = {
 		type = "fixed",
 		fixed = {{-1/2, -1/2, -1/4, -3/8, 1/2, 1/4},
-			{-5/8, -3/8, -1/2, -3/8, 3/8, 0}},
+			{-1/2, -3/8, -1/2, -3/8, 3/8, 0}},
 	}
 
 	minetest.register_node(":" .. name .. "_closed", fence_closed)
@@ -744,12 +802,57 @@ doors.register_fencegate("doors:gate_pine_wood", {
 	description = "Pine Fence Gate",
 	texture = "default_pine_wood.png",
 	material = "default:pine_wood",
-	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2}
+	groups = {choppy = 3, oddly_breakable_by_hand = 2, flammable = 3}
 })
 
 doors.register_fencegate("doors:gate_aspen_wood", {
 	description = "Aspen Fence Gate",
 	texture = "default_aspen_wood.png",
 	material = "default:aspen_wood",
-	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2}
+	groups = {choppy = 3, oddly_breakable_by_hand = 2, flammable = 3}
+})
+
+
+----fuels----
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:trapdoor",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:door_wood",
+	burntime = 14,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:gate_wood_closed",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:gate_acacia_wood_closed",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:gate_junglewood_closed",
+	burntime = 9,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:gate_pine_wood_closed",
+	burntime = 6,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "doors:gate_aspen_wood_closed",
+	burntime = 5,
 })

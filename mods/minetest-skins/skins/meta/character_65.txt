@@ -1,2 +1,0 @@
-name = "supereli",
-author = "supereli",
