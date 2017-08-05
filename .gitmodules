@@ -16,9 +16,6 @@
 [submodule "mods/awards"]
 	path = mods/awards
 	url = https://github.com/minetest-mods/awards
-[submodule "mods/bags"]
-	path = mods/bags
-	url = https://github.com/cornernote/minetest-bags
 [submodule "mods/bakedclay"]
 	path = mods/bakedclay
 	url = https://github.com/tenplus1/bakedclay
@@ -43,9 +40,6 @@
 [submodule "mods/hud_hunger"]
 	path = mods/hud_hunger
 	url = https://github.com/tenplus1/hud_hunger
-[submodule "mods/inventory_plus"]
-	path = mods/inventory_plus
-	url = https://github.com/cornernote/minetest-inventory_plus
 [submodule "mods/lifter"]
 	path = mods/lifter
 	url = https://github.com/Splizard/minetest-mod-lifter
@@ -79,9 +73,6 @@
 [submodule "mods/signs_lib"]
 	path = mods/signs_lib
 	url = https://github.com/minetest-mods/signs_lib
-[submodule "mods/skins"]
-	path = mods/skins
-	url = https://github.com/Zeg9/minetest-skins
 [submodule "mods/travelnet"]
 	path = mods/travelnet
 	url = https://github.com/Sokomine/travelnet
