@@ -88,3 +88,13 @@
 [submodule "mods/meshnode"]
 	path = mods/meshnode
 	url = https://github.com/stujones11/meshnode
+[submodule "mods/u_skins"]
+	path = mods/u_skins
+	url = https://github.com/bell07/minetest-skinsdb.git
+	branch = mod_with_skins
+[submodule "mods/factory_bridges"]
+	path = mods/factory_bridges
+	url = https://github.com/narrnika/factory_bridges
+[submodule "mods/unified_inventory"]
+	path = mods/unified_inventory
+	url = https://github.com/minetest-technic/unified_inventory
