@@ -19,9 +19,6 @@
 [submodule "mods/bakedclay"]
 	path = mods/bakedclay
 	url = https://github.com/tenplus1/bakedclay
-[submodule "mods/craftguide"]
-	path = mods/craftguide
-	url = https://github.com/minetest-mods/craftguide
 [submodule "mods/digilines"]
 	path = mods/digilines
 	url = https://github.com/minetest-mods/digilines
