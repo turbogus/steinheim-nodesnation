@@ -95,3 +95,12 @@
 [submodule "mods/ambience"]
 	path = mods/ambience
 	url = https://github.com/Neuromancer56/MinetestAmbienceServer/
+[submodule "mods/abriglass"]
+	path = mods/abriglass
+	url = https://github.com/Ezhh/abriglass
+[submodule "mods/abripanes"]
+	path = mods/abripanes
+	url = https://github.com/Ezhh/abripanes
+[submodule "mods/tinted_glass_doors"]
+	path = mods/tinted_glass_doors
+	url = https://github.com/Jat15/tinted_glass_doors
