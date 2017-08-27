@@ -104,3 +104,7 @@
 [submodule "mods/tinted_glass_doors"]
 	path = mods/tinted_glass_doors
 	url = https://github.com/Jat15/tinted_glass_doors
+[submodule "mods/advtrains"]
+	path = mods/advtrains
+	url = https://github.com/orwell96/advtrains
+	branch = nocrash
