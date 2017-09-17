@@ -92,9 +92,6 @@
 [submodule "mods/unified_inventory"]
 	path = mods/unified_inventory
 	url = https://github.com/minetest-technic/unified_inventory
-[submodule "mods/ambience"]
-	path = mods/ambience
-	url = https://github.com/Neuromancer56/MinetestAmbienceServer/
 [submodule "mods/abriglass"]
 	path = mods/abriglass
 	url = https://github.com/Ezhh/abriglass
@@ -108,3 +105,6 @@
 	path = mods/advtrains
 	url = https://github.com/orwell96/advtrains
 	branch = nocrash
+[submodule "mods/ambience"]
+	path = mods/ambience
+	url = https://github.com/tenplus1/ambience
