@@ -34,9 +34,6 @@
 [submodule "mods/hud_hunger"]
 	path = mods/hud_hunger
 	url = https://github.com/tenplus1/hud_hunger
-[submodule "mods/lifter"]
-	path = mods/lifter
-	url = https://github.com/Splizard/minetest-mod-lifter
 [submodule "mods/lpanes"]
 	path = mods/lpanes
 	url = https://github.com/brittm3/Minetest-lpanes
