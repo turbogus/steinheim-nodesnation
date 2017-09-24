@@ -79,9 +79,6 @@
 [submodule "mods/xdecor"]
 	path = mods/xdecor
 	url = https://github.com/minetest-mods/xdecor
-[submodule "mods/meshnode"]
-	path = mods/meshnode
-	url = https://github.com/stujones11/meshnode
 [submodule "mods/u_skins"]
 	path = mods/u_skins
 	url = https://github.com/bell07/minetest-skinsdb.git
