@@ -1,3 +1,16 @@
+local function bloc_blocks_stairs(nodename, def)	
+	local mod, name = string.match (nodename,"(.+):(.+)")
+	minetest.register_node(nodename,def)
+	if minetest.get_modpath("moreblocks") then
+		stairsplus:register_all(
+			mod,
+			name,
+			nodename,
+			def
+		)
+	end	
+end
+
 --Les cheminées de homedecor (conflit avec les slabs de moreblocs)
 minetest.register_craft({
 	output = 'fake_fire:chimney_top_stone',
@@ -18,22 +31,16 @@ minetest.register_node("blocs:snow_dispenser", {
 	description = "Snow Dispenser",
 	tiles = {"snow_dispenser.png"},
 	is_ground_content = false,
-	walkable = true,
-	pointable = true,
-	diggable = true,
 	groups = {cracky=1},
-	drop = "blocs:snow_dispenser",
 	sounds = ({
 		footstep = {name="poc", gain=0.25},
 		dug = {name="poc", gain=0.75},
 	}),
+	on_punch = function(p, node, player, pointed_thing)
+		player:get_inventory():add_item('main', 'default:snow 9')
+	end,
 })
-minetest.register_on_punchnode(function(p, node, player)
-    nomDuJoueur=player:get_player_name()
-	if node.name=="blocs:snow_dispenser" then
-        player:get_inventory():add_item('main', 'default:snow 9')
-    end
-end)
+
 minetest.register_craft({
 	output = 'blocs:snow_dispenser',
 	recipe = {
@@ -48,22 +55,16 @@ minetest.register_node("blocs:ice_dispenser", {
 	description = "Ice Dispenser",
 	tiles = {"ice_dispenser.png"},
 	is_ground_content = false,
-	walkable = true,
-	pointable = true,
-	diggable = true,
 	groups = {cracky=1},
-	drop = "blocs:ice_dispenser",
 	sounds = ({
 		footstep = {name="poc", gain=0.25},
 		dug = {name="poc", gain=0.75},
 	}),
+	on_punch = function(p, node, player, pointed_thing)
+		 player:get_inventory():add_item('main', 'default:ice 9')
+	end,
 })
-minetest.register_on_punchnode(function(p, node, player)
-    nomDuJoueur=player:get_player_name()
-	if node.name=="blocs:ice_dispenser" then
-        player:get_inventory():add_item('main', 'default:ice 9')
-    end
-end)
+
 minetest.register_craft({
 	output = 'blocs:ice_dispenser',
 	recipe = {
@@ -213,15 +214,10 @@ minetest.register_craft({
 })
 
 --Bloc de brique de terre avec les briques de terre
-minetest.register_node("blocs:dirt_brickblock", {
+bloc_blocks_stairs("blocs:dirt_brickblock", {
 	description = "bloc of dirt bricks",
 	tiles = {"dirt_brickblock.png"},
-	is_ground_content = false,
-	walkable = true,
-	pointable = true,
-	diggable = true,
 	groups = {cracky=3},
-	drop = "blocs:dirt_brickblock",
 	sounds = ({
 		footstep = {name="poc", gain=0.25},
 		dug = {name="poc", gain=0.75},
@@ -237,7 +233,7 @@ minetest.register_craft({
 
 --torchis
 minetest.register_craft({
-	output = '"blocs:torchis" 4',
+	output = 'blocs:torchis 4',
 	recipe = {
 		{"default:papyrus"},
 		{"blocs:dirt_lump"},
@@ -247,15 +243,11 @@ minetest.register_craft({
 		{"bucket:bucket_water", "bucket:bucket_empty"}
 	},
 })
-minetest.register_node("blocs:torchis", {
+bloc_blocks_stairs("blocs:torchis", {
 	description = "torchis",
 	tiles = {"torchis.png"},
 	is_ground_content = false,
-	walkable = true,
-	pointable = true,
-	diggable = true,
 	groups = {cracky=2,crumbly=3},
-	drop = "blocs:torchis",
 	sounds = ({
 		footstep = {name="poc", gain=0.25},
 		dug = {name="poc", gain=0.75},
@@ -285,26 +277,21 @@ minetest.register_node("blocs:commerce", {
 	description = "bloc commerçant",
 	tiles = {"commerce.png"},
 	is_ground_content = false,
-	walkable = true,
-	pointable = true,
-	diggable = true,
 	groups = {cracky=1},
-	drop = "blocs:commerce",
 	sounds = ({
 		footstep = {name="poc", gain=0.25},
 		dug = {name="poc", gain=0.75},
 	}),
+	on_punch = function(p, node, player, pointed_thing)
+		local nomDuJoueur=player:get_player_name()
+		if player:get_inventory():contains_item('main', 'blocs:piece_cuivre') then
+			player:get_inventory():remove_item('main', 'blocs:piece_cuivre')
+			player:get_inventory():add_item('main', 'default:pine_sapling')
+		else
+			minetest.chat_send_player(nomDuJoueur, "Vous n'avez pas assez de pieces de cuivre! (cout : 1pc)")
+		end
+	end,
 })
-minetest.register_on_punchnode(function(p, node, player)
-    nomDuJoueur=player:get_player_name()
-	if node.name=="blocs:commerce" and player:get_inventory():contains_item('main', 'blocs:piece_cuivre') then
-		player:get_inventory():remove_item('main', 'blocs:piece_cuivre')
-        player:get_inventory():add_item('main', 'default:pine_sapling')
-    end
-    if node.name=="blocs:commerce" and not player:get_inventory():contains_item('main', 'blocs:piece_cuivre') then
-        minetest.chat_send_player(nomDuJoueur, "Vous n'avez pas assez de pièces de cuivre! (coût : 1pc)")
-	end
-end)
 
 -- Récupération aléatoire de pine sapling dans la terre
 --[[minetest.override_item("default:dirt", {
@@ -414,7 +401,7 @@ minetest.register_craft({
 	}
 })
 
-
+--[[
 --Le 31/12/2016: alias pour virer les xdecor_tiles !!!!!
 minetest.register_alias("xdecor:stone_tile", "moreblocks:stone_tile")
 minetest.register_alias("xdecor:stone_tiles", "moreblocks:stone_tile")
@@ -427,7 +414,7 @@ minetest.register_craft({
 		{"xdecor:stone_tile"},
 	}
 })
-
+--]]
 --alias pour virer les soucis de rail!
 minetest.register_alias("default:rail", "carts:rail")
 
