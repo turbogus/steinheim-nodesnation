@@ -102,3 +102,6 @@
 [submodule "mods/ambience"]
 	path = mods/ambience
 	url = https://github.com/tenplus1/ambience
+[submodule "mods/BobBlocks"]
+	path = mods/BobBlocks
+	url = https://github.com/minetest-mods/BobBlocks
