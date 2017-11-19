@@ -1,17 +1,15 @@
-local old_nodes = {"mobs:egg","mobs:chicken","craft_guide:sign_wall",
-				   }
+local old_nodes = {
+	"mobs:egg",
+	"mobs:chicken",
+	"craft_guide:sign_wall",
+	"xdecor:workbench"
+}
 local old_entities = {}
 
-for _,node_name in ipairs(old_nodes) do
-    minetest.register_node(":"..node_name, {
-        groups = {old=1},
-    })
-end
-
-minetest.register_abm({
-    nodenames = {"group:old"},
-    interval = 1,
-    chance = 1,
+minetest.register_lbm({
+	name = "clear:replace",
+    nodenames = old_nodes,
+	run_at_every_load = false,
     action = function(pos, node)
         minetest.env:remove_node(pos)
     end,
