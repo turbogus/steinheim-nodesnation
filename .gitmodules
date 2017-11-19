@@ -75,7 +75,8 @@
 	url = https://github.com/Uberi/MineTest-WorldEdit
 [submodule "mods/xdecor"]
 	path = mods/xdecor
-	url = https://github.com/minetest-mods/xdecor
+	url = https://github.com/Jat15/xdecor
+	branch = Big-patch-1	
 [submodule "mods/u_skins"]
 	path = mods/u_skins
 	url = https://github.com/bell07/minetest-skinsdb.git
