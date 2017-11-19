@@ -2,7 +2,9 @@ local old_nodes = {
 	"mobs:egg",
 	"mobs:chicken",
 	"craft_guide:sign_wall",
-	"xdecor:workbench"
+	"xdecor:workbench",
+	"nyancat:nyancat",
+	"nyancat:nyancat_rainbow"
 }
 local old_entities = {}
 
