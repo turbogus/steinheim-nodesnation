@@ -58,3 +58,8 @@ end
 for n=1,table.getn(Block) do
 	CreationMoreblocks(Block[n])
 end
+
+--Conversion Pinewood 
+
+stairsplus:register_alias_all("moreblocks", "pinetree", "moreblocks", "pine_tree")
+stairsplus:register_alias_all("moreblocks", "pinewood", "moreblocks", "pine_wood")
