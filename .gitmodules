@@ -110,3 +110,6 @@
 	path = mods/moreblocks
 	url = https://github.com/Jat15/moreblocks
 	branch = Steinheim-Fix
+[submodule "mods/advtrains_subwayblocks"]
+	path = mods/advtrains_subwayblocks
+	url = git://gpcf.eu/advtrains_subwayblocks.git
