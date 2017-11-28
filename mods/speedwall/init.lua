@@ -11,64 +11,65 @@ code et graphisme sous licence GPL v2 ou superieur
 --déclaration de la liste de couleurs ( dyes et differentes couleur de bloc )
 local couleurs = {"black","blue","brown","cyan","green","grey","orange","pink","red","violet","white","yellow"}
 
---les blocs de speedwall :
-for z=1,table.getn(couleurs) do
+local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 	
-	--speedwall_sand :
+	-- Ajoute du groups auquelle il appartien si ce n est pas deja fait
+	if not( BlockDeBase["groups"][TypeDeBlock]== 1) then
+		BlockDeBase["groups"][TypeDeBlock] = 1
+	 end
+	
+	--Craft
 	minetest.register_craft({
-	output = "speedwall:sand"..couleurs[z].." 10",
+	output = "speedwall:"..TypeDeBlock..couleur,
 	recipe = {
-		{"dye:"..couleurs[z]..""},
-		{"default:sand"},
+		{"dye:"..couleur},
+		{"group:"..TypeDeBlock},
 		}
 	})
-	minetest.register_craft({
-	output = "speedwall:sand"..couleurs[z].." 10",
-	recipe = {
-		{"dye:"..couleurs[z]..""},
-		{"default:desert_sand"},
-		}
-	})
-	minetest.register_node("speedwall:sand"..couleurs[z].."", {
-		description = "Bloc de sable "..couleurs[z].."", 
-		tiles = {"speedwall_sand_"..couleurs[z]..".png"}, 
-		is_ground_content = true,
-		groups = {crumbly=3, falling_node=1, sand=1},
-		--sounds = default.node_sound_sand_defaults(),
-	})
+	
+	--Conversion en speedwall
+	BlockDeBase["description"]= "Bloc de "..TypeDeBlock.." "..couleur
+	BlockDeBase["tiles"]={"speedwall_"..TypeDeBlock.."_"..couleur..".png"}
+	minetest.register_node("speedwall:"..TypeDeBlock..couleur, BlockDeBase)
 
-	--speedwall_sandstone :
-	minetest.register_craft({
-	output = "speedwall:sandstone"..couleurs[z].." 4",
-	recipe = {
-		{"dye:"..couleurs[z]..""},
-		{"default:sandstone"},
-		}
-	})
-	minetest.register_node("speedwall:sandstone"..couleurs[z].."", {
-		description = "Bloc de sandstone "..couleurs[z].."", 
-		tiles = {"speedwall_sandstone_"..couleurs[z]..".png"}, 
-		is_ground_content = true,
-		groups = {crumbly=2,cracky=3},
-		--sounds = default.node_sound_sand_defaults(),
-	})
-	minetest.register_alias("simplewall:"..couleurs[z], "speedwall:sandstone"..couleurs[z])
+	--Retiré le groups	
+	BlockDeBase["groups"][TypeDeBlock] = nil
+
+	--Création moreblocks
+	if minetest.global_exists("moreblocks") and Couper then	
+		stairsplus:register_all("speedwall", TypeDeBlock..couleur, "speedwall:"..TypeDeBlock..couleur, BlockDeBase	)
+	end
 	
-	--speedwall_sandstone_brick :
-	minetest.register_craft({
-	output = "speedwall:sandstonebrick"..couleurs[z].." 2",
-	recipe = {
-		{"dye:"..couleurs[z]..""},
-		{"default:sandstonebrick"},
-		}
-	})
-	minetest.register_node("speedwall:sandstonebrick"..couleurs[z].."", {
-		description = "Bloc de sandstone brick "..couleurs[z].."", 
-		tiles = {"speedwall_sandstone_brick_"..couleurs[z]..".png"}, 
-		is_ground_content = true,
-		groups = {cracky=2},
-		--sounds = default.node_sound_sand_defaults(),
-	})
+end
+
+for z=1,table.getn(couleurs) do
+	CreationDeBlock(
+		couleurs[z],
+		"sand",
+		{
+			groups = {crumbly = 3, falling_node = 1, sand = 1},
+			sounds = default.node_sound_sand_defaults(),
+		},
+		false
+	)
+	CreationDeBlock(
+		couleurs[z],
+		"sandstone",
+		{
+			groups = {crumbly = 1, cracky = 3},
+			sounds = default.node_sound_stone_defaults(),
+		},
+		true
+	)
+	CreationDeBlock(
+		couleurs[z],
+		"sandstonebrick",
+		{
+			groups = {cracky = 2},
+			sounds = default.node_sound_stone_defaults(),
+		},
+		true
+	)	
 end
 
 minetest.register_alias("simplewall:bitume", "speedwall:sandstoneblack")

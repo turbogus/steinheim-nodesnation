@@ -34,9 +34,6 @@
 [submodule "mods/hud_hunger"]
 	path = mods/hud_hunger
 	url = https://github.com/tenplus1/hud_hunger
-[submodule "mods/lifter"]
-	path = mods/lifter
-	url = https://github.com/Splizard/minetest-mod-lifter
 [submodule "mods/lpanes"]
 	path = mods/lpanes
 	url = https://github.com/brittm3/Minetest-lpanes
@@ -78,10 +75,8 @@
 	url = https://github.com/Uberi/MineTest-WorldEdit
 [submodule "mods/xdecor"]
 	path = mods/xdecor
-	url = https://github.com/minetest-mods/xdecor
-[submodule "mods/meshnode"]
-	path = mods/meshnode
-	url = https://github.com/stujones11/meshnode
+	url = https://github.com/Jat15/xdecor
+	branch = Big-patch-1	
 [submodule "mods/u_skins"]
 	path = mods/u_skins
 	url = https://github.com/bell07/minetest-skinsdb.git
@@ -92,6 +87,29 @@
 [submodule "mods/unified_inventory"]
 	path = mods/unified_inventory
 	url = https://github.com/minetest-technic/unified_inventory
+[submodule "mods/abriglass"]
+	path = mods/abriglass
+	url = https://github.com/Ezhh/abriglass
+[submodule "mods/abripanes"]
+	path = mods/abripanes
+	url = https://github.com/Ezhh/abripanes
+[submodule "mods/tinted_glass_doors"]
+	path = mods/tinted_glass_doors
+	url = https://github.com/Jat15/tinted_glass_doors
+[submodule "mods/advtrains"]
+	path = mods/advtrains
+	url = https://github.com/orwell96/advtrains
+	branch = nocrash
 [submodule "mods/ambience"]
 	path = mods/ambience
-	url = https://github.com/Neuromancer56/MinetestAmbienceServer/
+	url = https://github.com/tenplus1/ambience
+[submodule "mods/BobBlocks"]
+	path = mods/BobBlocks
+	url = https://github.com/minetest-mods/BobBlocks
+[submodule "mods/moreblocks"]
+	path = mods/moreblocks
+	url = https://github.com/Jat15/moreblocks
+	branch = Steinheim-Fix
+[submodule "mods/advtrains_subwayblocks"]
+	path = mods/advtrains_subwayblocks
+	url = git://gpcf.eu/advtrains_subwayblocks.git
