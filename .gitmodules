@@ -119,3 +119,6 @@
 [submodule "mods/invsaw"]
 	path = mods/invsaw
 	url = https://github.com/cheapie/invsaw
+[submodule "mods/currency"]
+	path = mods/currency
+	url = https://github.com/minetest-mods/currency
