@@ -1,1 +1,1 @@
-Mod ajoutant des blocs pour les constructions antiques - Mod adding blocks for ancient buildings - Version 0.2. [Ajout compatibilité stairsplus le 07/08/2017 - Adding support for stairplus 2017/08/07]
+Mod ajoutant des blocs pour les constructions antiques - Mod adding blocks for ancient buildings - Version 0.2. [Ajout compatibilité stairsplus le 07/08/2017 - Adding support for stairplus 2017/08/07] - [Ajout de "age_old_sandstone_double_slab_alt" 20/11/2017]

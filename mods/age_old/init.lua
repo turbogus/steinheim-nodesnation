@@ -83,6 +83,15 @@ age_old_node_stairs("age_old:sandstone_double_slab", {
 	sounds = default.node_sound_stone_defaults()
 })
 
+age_old_node_stairs("age_old:sandstone_double_slab_alt", {
+	description = "Sandstone_double_slab_alt",
+	tiles = {"age_old_sandstone_double_slab_alt_top.png",
+"age_old_sandstone_double_slab_alt.png"},
+	is_ground_content = true,
+	groups = {cracky=2},
+	sounds = default.node_sound_stone_defaults()
+})
+
 age_old_node_stairs("age_old:sandstone_facade", {
 	description = "Sandstone_facade",
 	tiles = {"age_old_sandstone_facade_top.png",
@@ -146,6 +155,15 @@ age_old_node_stairs("age_old:stone_aged_double_slab", {
 	description = "Stone_aged_double_slab",
 	tiles = {"age_old_stone_aged_double_slab_top.png",
 "age_old_stone_aged_double_slab.png"},
+	is_ground_content = true,
+	groups = {cracky=2},
+	sounds = default.node_sound_stone_defaults()
+})
+
+age_old_node_stairs("age_old:stone_aged_double_slab_alt", {
+	description = "Stone_aged_double_slab_alt",
+	tiles = {"age_old_stone_aged_double_slab_alt_top.png",
+"age_old_stone_aged_double_slab_alt.png"},
 	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults()

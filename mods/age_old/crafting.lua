@@ -113,6 +113,18 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "age_old:sandstone_double_slab_alt 9",
+	recipe = {
+		{"age_old:sandstone_aged", "age_old:sandstone_aged",
+"age_old:sandstone_aged"},
+		{"default:sandstone", "group:stick",
+"default:sandstone"},
+		{"age_old:sandstone_aged", "age_old:sandstone_aged",
+"age_old:sandstone_aged"},
+	}
+})
+
+minetest.register_craft({
 	output = "age_old:sandstone_facade 4",
 	recipe = {
 		{"age_old:sandstone_bricks", "age_old:sandstone_bricks",
@@ -201,6 +213,18 @@ minetest.register_craft({
 		{"age_old:stone_aged", "age_old:stone_aged",
 "age_old:stone_aged"},
 		{"default:stone", "default:stone",
+"default:stone"},
+		{"age_old:stone_aged", "age_old:stone_aged",
+"age_old:stone_aged"},
+	}
+})
+
+minetest.register_craft({
+	output = "age_old:stone_aged_double_slab_alt 9",
+	recipe = {
+		{"age_old:stone_aged", "age_old:stone_aged",
+"age_old:stone_aged"},
+		{"default:stone", "group:stick",
 "default:stone"},
 		{"age_old:stone_aged", "age_old:stone_aged",
 "age_old:stone_aged"},
