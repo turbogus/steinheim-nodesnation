@@ -122,3 +122,6 @@
 [submodule "mods/currency"]
 	path = mods/currency
 	url = https://github.com/minetest-mods/currency
+[submodule "mods/billboard"]
+	path = mods/billboard
+	url = https://github.com/acmgit/billboard
