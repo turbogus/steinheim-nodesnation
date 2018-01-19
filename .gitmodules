@@ -113,3 +113,15 @@
 [submodule "mods/advtrains_subwayblocks"]
 	path = mods/advtrains_subwayblocks
 	url = git://gpcf.eu/advtrains_subwayblocks.git
+[submodule "mods/letters"]
+	path = mods/letters
+	url = https://github.com/minetest-mods/letters
+[submodule "mods/invsaw"]
+	path = mods/invsaw
+	url = https://github.com/cheapie/invsaw
+[submodule "mods/currency"]
+	path = mods/currency
+	url = https://github.com/minetest-mods/currency
+[submodule "mods/billboard"]
+	path = mods/billboard
+	url = https://github.com/acmgit/billboard
