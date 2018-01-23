@@ -24,7 +24,7 @@ local Block = {
 
 local function CreationMoreblocks(nodename)
 	
-	function CopieTable(Table)	
+	local function CopieTable(Table)	
 		return minetest.deserialize(minetest.serialize(Table))
 	end
 	
