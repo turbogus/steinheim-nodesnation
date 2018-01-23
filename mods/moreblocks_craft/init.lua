@@ -1,5 +1,4 @@
 minetest.clear_craft({
-	output = "moreblocks:circle_stone_bricks 8",
 	recipe = {
 		{"default:stone", "default:stone", "default:stone"},
 		{"default:stone", "", "default:stone"},
@@ -17,7 +16,6 @@ minetest.register_craft({
 })
 
 minetest.clear_craft({
-	output = "moreblocks:stone_tile 4",
 	recipe = {
 		{"default:cobble", "default:cobble"},
 		{"default:cobble", "default:cobble"},
