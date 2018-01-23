@@ -125,3 +125,6 @@
 [submodule "mods/billboard"]
 	path = mods/billboard
 	url = https://github.com/acmgit/billboard
+[submodule "mods/pipeworks"]
+	path = mods/pipeworks
+	url = https://github.com/minetest-mods/pipeworks
