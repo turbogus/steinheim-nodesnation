@@ -127,3 +127,6 @@
 [submodule "mods/xdecor"]
 	path = mods/xdecor
 	url = https://github.com/minetest-mods/xdecor
+[submodule "mods/intllib"]
+	path = mods/intllib
+	url = https://github.com/minetest-mods/intllib
