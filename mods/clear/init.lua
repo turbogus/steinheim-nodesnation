@@ -4,9 +4,12 @@ local old_nodes = {
 	"craft_guide:sign_wall",
 	"xdecor:workbench",
 	"nyancat:nyancat",
-	"nyancat:nyancat_rainbow"
+	"nyancat:nyancat_rainbow",
+	"mycorners:machine_corner"
 }
-local old_entities = {}
+
+local old_entities = {
+}
 
 minetest.register_lbm({
 	name = "clear:replace",
