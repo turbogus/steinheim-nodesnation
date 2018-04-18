@@ -130,3 +130,6 @@
 [submodule "mods/intllib"]
 	path = mods/intllib
 	url = https://github.com/minetest-mods/intllib
+[submodule "mods/vehicles"]
+	path = mods/vehicles
+	url = https://github.com/D00Med/vehicles
