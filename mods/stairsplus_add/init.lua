@@ -19,7 +19,11 @@ local Block = {
 	"vehicles:stripe2",
 	"vehicles:stripe3",
 	"vehicles:stripe4",
-	"vehicles:window"
+	"vehicles:window",
+	
+	--default
+	"default:coalblock"
+	
 }
 
 local function CreationMoreblocks(nodename)
@@ -45,7 +49,11 @@ local function CreationMoreblocks(nodename)
 			def.groups.groupname = nil
 		end
 	end
-
+	
+	if mod == "default" then
+		mod = "moreblocks"
+	end
+	
 	stairsplus:register_all(
 		mod,
 		name,
@@ -63,3 +71,4 @@ end
 
 stairsplus:register_alias_all("moreblocks", "pinetree", "moreblocks", "pine_tree")
 stairsplus:register_alias_all("moreblocks", "pinewood", "moreblocks", "pine_wood")
+stairsplus:register_alias_all("default", "coalblock", "moreblocks", "coalblock")
