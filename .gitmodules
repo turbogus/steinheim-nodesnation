@@ -136,3 +136,6 @@
 [submodule "mods/bridger"]
 	path = mods/bridger
 	url = https://github.com/v-rob/bridger
+[submodule "mods/markers"]
+	path = mods/markers
+	url = https://github.com/Sokomine/markers
