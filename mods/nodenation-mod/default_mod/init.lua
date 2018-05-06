@@ -1,0 +1,1 @@
+minetest.override_item("default:cobble", {stack_max = 9999})
