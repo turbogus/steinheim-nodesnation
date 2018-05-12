@@ -139,3 +139,6 @@
 [submodule "mods/markers"]
 	path = mods/markers
 	url = https://github.com/Sokomine/markers
+[submodule "mods/replacer"]
+	path = mods/replacer
+	url = https://github.com/HybridDog/replacer
