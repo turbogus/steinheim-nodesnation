@@ -73,10 +73,6 @@
 [submodule "mods/worldedit"]
 	path = mods/worldedit
 	url = https://github.com/Uberi/MineTest-WorldEdit
-[submodule "mods/u_skins"]
-	path = mods/u_skins
-	url = https://github.com/bell07/minetest-skinsdb.git
-	branch = mod_with_skins
 [submodule "mods/factory_bridges"]
 	path = mods/factory_bridges
 	url = https://github.com/narrnika/factory_bridges
@@ -142,3 +138,6 @@
 [submodule "mods/replacer"]
 	path = mods/replacer
 	url = https://github.com/HybridDog/replacer
+[submodule "mods/skinsdb"]
+	path = mods/skinsdb
+	url = https://github.com/minetest-mods/skinsdb
