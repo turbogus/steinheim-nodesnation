@@ -141,3 +141,6 @@
 [submodule "mods/skinsdb"]
 	path = mods/skinsdb
 	url = https://github.com/minetest-mods/skinsdb
+[submodule "mods/builtin_item"]
+	path = mods/builtin_item
+	url = https://github.com/tenplus1/builtin_item
