@@ -18,6 +18,8 @@ local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 		BlockDeBase["groups"][TypeDeBlock] = 1
 	 end
 	
+	table.copy(TypeDeBlock)
+	
 	--Craft
 	minetest.register_craft({
 	output = "speedwall:"..TypeDeBlock..couleur,
@@ -32,12 +34,13 @@ local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 	BlockDeBase["tiles"]={"speedwall_"..TypeDeBlock.."_"..couleur..".png"}
 	minetest.register_node("speedwall:"..TypeDeBlock..couleur, BlockDeBase)
 
-	--Retiré le groups	
+	--Retiré le groups
+	table.copy(TypeDeBlock)
 	BlockDeBase["groups"][TypeDeBlock] = nil
 
 	--Création moreblocks
-	if minetest.global_exists("moreblocks") and Couper then	
-		stairsplus:register_all("speedwall", TypeDeBlock..couleur, "speedwall:"..TypeDeBlock..couleur, BlockDeBase	)
+	if minetest.global_exists("moreblocks") and Couper then
+		stairsplus:register_all("speedwall", TypeDeBlock..couleur, "speedwall:"..TypeDeBlock..couleur, BlockDeBase)
 	end
 	
 end
