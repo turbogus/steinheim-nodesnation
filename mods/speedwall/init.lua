@@ -18,10 +18,6 @@ local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 		 minetest.registered_nodes["default:" .. TypeDeBlock]["groups"][TypeDeBlock] = 1
 		 BlockDeBase["groups"][TypeDeBlock] = 1
 	 end
-	 
-
-	
-	BlockDeBase = table.copy(BlockDeBase)
 	
 	--Craft
 	minetest.register_craft({
