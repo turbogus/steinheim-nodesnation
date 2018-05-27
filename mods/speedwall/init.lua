@@ -15,10 +15,13 @@ local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 	
 	-- Ajoute du groups auquelle il appartien si ce n est pas deja fait
 	if not( BlockDeBase["groups"][TypeDeBlock]== 1) then
-		BlockDeBase["groups"][TypeDeBlock] = 1
+		 minetest.registered_nodes["default:" .. TypeDeBlock]["groups"][TypeDeBlock] = 1
+		 BlockDeBase["groups"][TypeDeBlock] = 1
 	 end
+	 
+
 	
-	table.copy(TypeDeBlock)
+	BlockDeBase = table.copy(BlockDeBase)
 	
 	--Craft
 	minetest.register_craft({
@@ -35,7 +38,7 @@ local function CreationDeBlock(couleur, TypeDeBlock, BlockDeBase, Couper)
 	minetest.register_node("speedwall:"..TypeDeBlock..couleur, BlockDeBase)
 
 	--Retiré le groups
-	table.copy(TypeDeBlock)
+	BlockDeBase = table.copy(BlockDeBase)
 	BlockDeBase["groups"][TypeDeBlock] = nil
 
 	--Création moreblocks
