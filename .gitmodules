@@ -9,7 +9,7 @@
 	url = https://github.com/minetest-mods/anvil
 [submodule "mods/areas"]
 	path = mods/areas
-	url = https://github.com/ShadowNinja/areas
+	url = https://github.com/MuhdNurHidayat/areas
 [submodule "mods/awards"]
 	path = mods/awards
 	url = https://github.com/minetest-mods/awards
