@@ -107,7 +107,8 @@
 	url = https://github.com/minetest-mods/letters
 [submodule "mods/invsaw"]
 	path = mods/invsaw
-	url = https://github.com/cheapie/invsaw
+	url = https://github.com/Jat15/invsaw
+	branch = Nodenation
 [submodule "mods/currency"]
 	path = mods/currency
 	url = https://github.com/minetest-mods/currency
