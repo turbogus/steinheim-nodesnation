@@ -142,3 +142,6 @@
 [submodule "mods/builtin_item"]
 	path = mods/builtin_item
 	url = https://github.com/tenplus1/builtin_item
+[submodule "mods/chesttools"]
+	path = mods/chesttools
+	url = https://github.com/Jat15/chesttools
