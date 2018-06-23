@@ -15,7 +15,7 @@
 	url = https://github.com/minetest-mods/awards
 [submodule "mods/bakedclay"]
 	path = mods/bakedclay
-	url = https://github.com/tenplus1/bakedclay
+	url = https://notabug.org/TenPlus1/bakedclay.git
 [submodule "mods/digilines"]
 	path = mods/digilines
 	url = https://github.com/minetest-mods/digilines
@@ -33,7 +33,7 @@
 	url = https://github.com/minetest-mods/homedecor_modpack
 [submodule "mods/hud_hunger"]
 	path = mods/hud_hunger
-	url = https://github.com/tenplus1/hud_hunger
+	url = https://notabug.org/TenPlus1/hud_hunger.git
 [submodule "mods/lpanes"]
 	path = mods/lpanes
 	url = https://github.com/brittm3/Minetest-lpanes
@@ -48,16 +48,16 @@
 	url = https://github.com/minetest-mods/mesecons
 [submodule "mods/mobs_animal"]
 	path = mods/mobs_animal
-	url = https://github.com/tenplus1/mobs_animal
+	url = https://notabug.org/TenPlus1/mobs_animal.git
 [submodule "mods/mobs_monster"]
 	path = mods/mobs_monster
-	url = https://github.com/tenplus1/mobs_monster
+	url = https://notabug.org/TenPlus1/mobs_monster.git
 [submodule "mods/mydoors"]
 	path = mods/mydoors
 	url = https://github.com/minetest-mods/mydoors
 [submodule "mods/mobs_redo"]
 	path = mods/mobs_redo
-	url = https://github.com/tenplus1/mobs_redo
+	url = https://notabug.org/TenPlus1/mobs_redo.git
 [submodule "mods/mymillwork"]
 	path = mods/mymillwork
 	url = https://github.com/minetest-mods/mymillwork
@@ -94,7 +94,7 @@
 	branch = nocrash
 [submodule "mods/ambience"]
 	path = mods/ambience
-	url = https://github.com/tenplus1/ambience
+	url = https://notabug.org/TenPlus1/ambience.git
 [submodule "mods/BobBlocks"]
 	path = mods/BobBlocks
 	url = https://github.com/minetest-mods/BobBlocks
@@ -141,7 +141,7 @@
 	url = https://github.com/minetest-mods/skinsdb
 [submodule "mods/builtin_item"]
 	path = mods/builtin_item
-	url = https://github.com/tenplus1/builtin_item
+	url = https://notabug.org/TenPlus1/builtin_item.git
 [submodule "mods/chesttools"]
 	path = mods/chesttools
 	url = https://github.com/Jat15/chesttools
