@@ -69,7 +69,7 @@
 	url = https://github.com/Sokomine/travelnet
 [submodule "mods/unifieddyes"]
 	path = mods/unifieddyes
-	url = https://github.com/minetest-mods/unifieddyes
+	url = https://gitlab.com/VanessaE/unifieddyes
 [submodule "mods/worldedit"]
 	path = mods/worldedit
 	url = https://github.com/Uberi/MineTest-WorldEdit
