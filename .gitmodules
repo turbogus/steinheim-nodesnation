@@ -117,7 +117,7 @@
 	url = https://github.com/acmgit/billboard
 [submodule "mods/pipeworks"]
 	path = mods/pipeworks
-	url = https://github.com/minetest-mods/pipeworks
+	url = https://gitlab.com/VanessaE/pipeworks
 [submodule "mods/xdecor"]
 	path = mods/xdecor
 	url = https://github.com/minetest-mods/xdecor
