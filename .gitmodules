@@ -145,3 +145,6 @@
 [submodule "mods/chesttools"]
 	path = mods/chesttools
 	url = https://github.com/Jat15/chesttools
+[submodule "mods/connected_chests"]
+	path = mods/connected_chests
+	url = https://github.com/HybridDog/connected_chests
