@@ -148,3 +148,6 @@
 [submodule "mods/connected_chests"]
 	path = mods/connected_chests
 	url = https://github.com/HybridDog/connected_chests
+[submodule "mods/Farming"]
+	path = mods/Farming
+	url = https://notabug.org/TenPlus1/Farming
