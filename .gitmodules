@@ -148,3 +148,6 @@
 [submodule "mods/Farming"]
 	path = mods/Farming
 	url = https://notabug.org/TenPlus1/Farming
+[submodule "mods/unifieddyes"]
+	path = mods/unifieddyes
+	url = https://gitlab.com/VanessaE/unifieddyes
