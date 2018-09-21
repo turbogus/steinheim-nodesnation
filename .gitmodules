@@ -30,7 +30,7 @@
 	url = https://bitbucket.org/kingarthursteam/gates.git
 [submodule "mods/homedecor"]
 	path = mods/homedecor
-	url = https://github.com/minetest-mods/homedecor_modpack
+	url = https://gitlab.com/VanessaE/homedecor_modpack
 [submodule "mods/hud_hunger"]
 	path = mods/hud_hunger
 	url = https://notabug.org/TenPlus1/hud_hunger.git
@@ -97,7 +97,7 @@
 	url = https://github.com/minetest-mods/BobBlocks
 [submodule "mods/moreblocks"]
 	path = mods/moreblocks
-	url = https://github.com/Jat15/moreblocks
+	url = https://github.com/minetest-mods/moreblocks/
 	branch = Steinheim-Fix
 [submodule "mods/letters"]
 	path = mods/letters
