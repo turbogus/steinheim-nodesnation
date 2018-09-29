@@ -1348,95 +1348,6 @@
 		})
 	end
 
--- Traffic cone
-	minetest.register_node("infrastructure:traffic_cone", {
-		description = "Traffic cone",
-		tiles = {
-			"infrastructure_traffic_cone_top.png",
-			"infrastructure_traffic_cone_bottom.png",
-			"infrastructure_traffic_cone_side.png",
-			"infrastructure_traffic_cone_side.png",
-			"infrastructure_traffic_cone_side.png",
-			"infrastructure_traffic_cone_side.png"
-		},
-		drawtype = "nodebox",
-		paramtype = "light",
-		groups = {cracky = 2},
-		walkable = false,
-		light_source = ENERGY_ABSORBING_TERMINAL_LIGHT_RANGE,
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-1/4, -1/2, 0, 1/4, 1/4, 0},
-				{0, -1/2, -1/4, 0, 1/4, 1/4},
-
-				{-3/8, -1/2, -1/8, 3/8, -3/8, 1/8},
-				{-1/8, -1/2, -3/8, 1/8, -3/8, 3/8},
-
-				{-3/8, -1/2 + 0.001, -3/8, 3/8, -1/2 + 0.001, 3/8}
-			}
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-1/4, -1/2, 0, 1/4, 1/4, 0},
-				{0, -1/2, -1/4, 0, 1/4, 1/4},
-
-				{-3/8, -1/2, -1/8, 3/8, -3/8, 1/8},
-				{-1/8, -1/2, -3/8, 1/8, -3/8, 3/8},
-
-				{-3/8, -1/2 + 0.001, -3/8, 3/8, -1/2 + 0.001, 3/8}
-			}
-		},
-
-		after_place_node = function(pos, placer)
-			displacement(pos, placer)
-		end
-	})
-
-	for i = 1, 3 do
-		minetest.register_node("infrastructure:traffic_cone_displacement_"..tostring(i), {
-			tiles = {
-				"infrastructure_traffic_cone_top.png",
-				"infrastructure_traffic_cone_bottom.png",
-				"[combine:32x32:0,"..tostring(i * 8).."=infrastructure_traffic_cone_side.png:0,"..tostring(i * 8 - 32).."=infrastructure_traffic_cone_side.png",
-				"[combine:32x32:0,"..tostring(i * 8).."=infrastructure_traffic_cone_side.png:0,"..tostring(i * 8 - 32).."=infrastructure_traffic_cone_side.png",
-				"[combine:32x32:0,"..tostring(i * 8).."=infrastructure_traffic_cone_side.png:0,"..tostring(i * 8 - 32).."=infrastructure_traffic_cone_side.png",
-				"[combine:32x32:0,"..tostring(i * 8).."=infrastructure_traffic_cone_side.png:0,"..tostring(i * 8 - 32).."=infrastructure_traffic_cone_side.png"
-			},
-			drawtype = "nodebox",
-			paramtype = "light",
-			groups = {cracky = 2, not_in_creative_inventory = 1},
-			walkable = false,
-			light_source = ENERGY_ABSORBING_TERMINAL_LIGHT_RANGE,
-			drop = "infrastructure:traffic_cone",
-			node_box = {
-				type = "fixed",
-				fixed = {
-					{-1/4, -1/2 - i/4, 0, 1/4, 1/4 - i/4, 0},
-					{0, -1/2 - i/4, -1/4, 0, 1/4 - i/4, 1/4},
-
-					{-3/8, -1/2 - i/4, -1/8, 3/8, -3/8 - i/4, 1/8},
-					{-1/8, -1/2 - i/4, -3/8, 1/8, -3/8 - i/4, 3/8},
-
-					{-3/8, -1/2 + 0.001 - i/4, -3/8, 3/8, -1/2 + 0.001 - i/4, 3/8}
-				}
-			},
-			selection_box = {
-				type = "fixed",
-				fixed = {
-					{-1/4, -1/2 - i/4, 0, 1/4, 1/4 - i/4, 0},
-					{0, -1/2 - i/4, -1/4, 0, 1/4 - i/4, 1/4},
-
-					{-3/8, -1/2 - i/4, -1/8, 3/8, -3/8 - i/4, 1/8},
-					{-1/8, -1/2 - i/4, -3/8, 1/8, -3/8 - i/4, 3/8},
-
-					{-3/8, -1/2 + 0.001 - i/4, -3/8, 3/8, -1/2 + 0.001 - i/4, 3/8}
-				}
-			}
-		})
-	end
-
 -- Noise barrier
 	minetest.register_node("infrastructure:noise_barrier", {
 		description = "Noise barrier",
@@ -1471,3 +1382,10 @@
 			}
 		}
 	})
+
+-- Alias traffic cone
+
+minetest.register_alias("infrastructure:traffic_cone", "streets:roadwork_pylon")
+minetest.register_alias("infrastructure:traffic_cone_displacement_1", "streets:roadwork_pylon")
+minetest.register_alias("infrastructure:traffic_cone_displacement_2", "streets:roadwork_pylon")
+minetest.register_alias("infrastructure:traffic_cone_displacement_3", "streets:roadwork_pylon")

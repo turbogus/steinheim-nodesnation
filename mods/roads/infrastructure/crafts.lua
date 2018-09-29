@@ -325,74 +325,6 @@ end
 		}
 	})
 
--- Road sign crosswalk
-	minetest.register_craft({
-		output = '"infrastructure:road_sign_crosswalk" 1',
-		recipe = {
-			{'wool:green', 'wool:green', 'wool:green'},
-			{'wool:green', 'wool:blue', 'wool:green'},
-			{'wool:green', 'wool:green', 'wool:green'}
-		}
-	})
-
--- Road sign right_of_way
-	minetest.register_craft({
-		output = '"infrastructure:road_sign_right_of_way" 1',
-		recipe = {
-			{"", 'wool:white', ""},
-			{'wool:white', 'wool:yellow', 'wool:white'},
-			{"", 'wool:white', ""}
-		}
-	})
-
--- Road sign stop
-	minetest.register_craft({
-		output = '"infrastructure:road_sign_stop" 1',
-		recipe = {
-			{'wool:red', 'wool:red', 'wool:red'},
-			{'wool:red', 'wool:white', 'wool:red'},
-			{'wool:red', 'wool:red', 'wool:red'}
-		}
-	})
-
--- Road sign yield
-	minetest.register_craft({
-		output = '"infrastructure:road_sign_yield" 1',
-		recipe = {
-			{'wool:orange', 'wool:orange', 'wool:orange'},
-			{'wool:red', 'wool:orange', 'wool:red'},
-			{'', 'wool:red', ''}
-		}
-	})
-
--- Automatic warning device
-	minetest.register_craft({
-		output = '"infrastructure:automatic_warning_device" 1',
-		recipe = {
-			{'wool:red', 'default:steel_ingot', 'wool:red'},
-			{'', 'default:steel_ingot', ''},
-			{'infrastructure:concrete', 'infrastructure:concrete', 'infrastructure:concrete'}
-		}
-	})
-
--- Boom barrier
-	minetest.register_craft({
-		output = '"infrastructure:boom_barrier_mechanism" 1',
-		recipe = {
-			{'default:steel_ingot', 'default:steel_ingot', ''},
-			{'', 'default:steel_ingot', ''},
-			{'infrastructure:concrete', 'infrastructure:concrete', 'infrastructure:concrete'}
-		}
-	})
-
-	minetest.register_craft({
-		output = '"infrastructure:boom_barrier_arm" 1',
-		recipe = {
-			{'', 'wool:red', ''},
-			{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'}
-		}
-	})
-
 -- Aircraft warning light
 	minetest.register_craft({
 		output = '"infrastructure:aircraft_warning_light" 1',
@@ -420,15 +352,6 @@ end
 			{'wool:grey', 'wool:grey'},
 			{'wool:grey', 'wool:yellow'},
 			{'wool:grey', 'wool:grey'}
-		}
-	})
-
--- Traffic cone
-	minetest.register_craft({
-		output = '"infrastructure:traffic_cone" 1',
-		recipe = {
-			{'', 'wool:orange', ''},
-			{'wool:orange', '', 'wool:orange'},
 		}
 	})
 

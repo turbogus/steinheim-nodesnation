@@ -2,6 +2,6 @@ default
 moreblocks
 mesecons
 wool
-streetsmod
+streets
 digilines
 technic?
