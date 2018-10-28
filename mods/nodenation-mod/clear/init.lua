@@ -5,7 +5,13 @@ local old_nodes = {
 	"xdecor:workbench",
 	"nyancat:nyancat",
 	"nyancat:nyancat_rainbow",
-	"mycorners:machine_corner"
+	"mycorners:machine_corner",
+	"bakedclay:delphinium",
+	"bakedclay:thistle",
+	"bakedclay:lazarus",
+	"bakedclay:mannagrass",
+	"memorandum:letter_empty",
+	"memorandum:letter_written"
 }
 
 local old_entities = {
@@ -14,9 +20,9 @@ local old_entities = {
 minetest.register_lbm({
 	name = "clear:replace",
     nodenames = old_nodes,
-	run_at_every_load = false,
+	run_at_every_load = true,
     action = function(pos, node)
-        minetest.env:remove_node(pos)
+        minetest.remove_node(pos)
     end,
 })
 
