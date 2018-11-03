@@ -148,3 +148,12 @@
 [submodule "mods/unifieddyes"]
 	path = mods/unifieddyes
 	url = https://gitlab.com/VanessaE/unifieddyes
+[submodule "mods/minetest_hudbars"]
+	path = mods/minetest_hudbars
+	url = https://repo.or.cz/minetest_hudbars.git
+[submodule "mods/minetest_hbhunger"]
+	path = mods/minetest_hbhunger
+	url = https://repo.or.cz/minetest_hbhunger.git
+[submodule "mods/minetest_hbarmor"]
+	path = mods/minetest_hbarmor
+	url = https://repo.or.cz/minetest_hbarmor.git
