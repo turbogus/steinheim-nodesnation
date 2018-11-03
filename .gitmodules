@@ -31,9 +31,6 @@
 [submodule "mods/homedecor"]
 	path = mods/homedecor
 	url = https://gitlab.com/VanessaE/homedecor_modpack
-[submodule "mods/hud_hunger"]
-	path = mods/hud_hunger
-	url = https://notabug.org/TenPlus1/hud_hunger.git
 [submodule "mods/lpanes"]
 	path = mods/lpanes
 	url = https://github.com/brittm3/Minetest-lpanes
