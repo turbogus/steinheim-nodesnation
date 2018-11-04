@@ -10,9 +10,6 @@
 [submodule "mods/areas"]
 	path = mods/areas
 	url = https://github.com/MuhdNurHidayat/areas
-[submodule "mods/awards"]
-	path = mods/awards
-	url = https://github.com/minetest-mods/awards
 [submodule "mods/bakedclay"]
 	path = mods/bakedclay
 	url = https://notabug.org/TenPlus1/bakedclay.git
