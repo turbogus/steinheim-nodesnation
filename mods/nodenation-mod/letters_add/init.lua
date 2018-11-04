@@ -1,21 +1,2 @@
-local clay = {
-	{"white", "White"},
-	{"grey", "Grey"},
-	{"black", "Black"},
-	{"red", "Red"},
-	{"yellow", "Yellow"},
-	{"green", "Green"},
-	{"cyan", "Cyan"},
-	{"blue", "Blue"},
-	{"magenta", "Magenta"},
-	{"orange", "Orange"},
-	{"violet", "Violet"},
-	{"brown", "Brown"},
-	{"pink", "Pink"},
-	{"dark_grey", "Dark Grey"},
-	{"dark_green", "Dark Green"},
-}
-
-for _, clay in pairs(clay) do
-	letters.register_letters("bakedclay", "baked_clay_" .. clay[1], "bakedclay:" .. clay[1], clay[2] .. " Baked Clay", "baked_clay_" .. clay[1] ..".png")
-end
+letters.register_letters("default", "clay", "default:clay", "Clay", "default_clay.png")
+letters.register_letters("default", "stonebrick", "default:stonebrick", "Stone brick", "default_stone_brick.png")
