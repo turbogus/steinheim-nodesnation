@@ -154,3 +154,6 @@
 [submodule "mods/minetest_hbarmor"]
 	path = mods/minetest_hbarmor
 	url = https://repo.or.cz/minetest_hbarmor.git
+[submodule "mods/extrahb"]
+	path = mods/extrahb
+	url = https://github.com/Jat15/extrahb
