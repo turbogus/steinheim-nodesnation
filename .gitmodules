@@ -79,10 +79,6 @@
 [submodule "mods/BobBlocks"]
 	path = mods/BobBlocks
 	url = https://github.com/minetest-mods/BobBlocks
-[submodule "mods/moreblocks"]
-	path = mods/moreblocks
-	url = https://github.com/minetest-mods/moreblocks/
-	branch = Steinheim-Fix
 [submodule "mods/letters"]
 	path = mods/letters
 	url = https://github.com/minetest-mods/letters
