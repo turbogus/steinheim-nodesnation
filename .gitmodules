@@ -157,3 +157,6 @@
 [submodule "mods/extrahb"]
 	path = mods/extrahb
 	url = https://github.com/Jat15/extrahb
+[submodule "mods/railroad_paraphernalia"]
+	path = mods/railroad_paraphernalia
+	url = https://github.com/h-v-smacker/railroad_paraphernalia
