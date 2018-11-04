@@ -156,3 +156,6 @@
 	path = mods/angledwalls
 	url = https://github.com/Jat15/angledwalls
 	branch = Rework-angledwall
+[submodule "mods/nodenation-mod/angledwalls_alias"]
+	path = mods/nodenation-mod/angledwalls_alias
+	url = https://github.com/Jat15/angledwalls_alias
