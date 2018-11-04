@@ -1,9 +1,6 @@
 [submodule "mods/3d_armor"]
 	path = mods/3d_armor
 	url = https://github.com/stujones11/minetest-3d_armor.git
-[submodule "mods/angledwalls"]
-	path = mods/angledwalls
-	url = https://github.com/TumeniNodes/angledwalls
 [submodule "mods/anvil"]
 	path = mods/anvil
 	url = https://github.com/minetest-mods/anvil
