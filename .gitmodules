@@ -149,3 +149,6 @@
 [submodule "mods/ltc4000e"]
 	path = mods/ltc4000e
 	url = https://cheapiesystems.com/git/ltc4000e
+[submodule "mods/moreblocks"]
+	path = mods/moreblocks
+	url = https://github.com/minetest-mods/moreblocks/
