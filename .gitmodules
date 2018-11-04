@@ -152,3 +152,7 @@
 [submodule "mods/moreblocks"]
 	path = mods/moreblocks
 	url = https://github.com/minetest-mods/moreblocks/
+[submodule "mods/angledwalls"]
+	path = mods/angledwalls
+	url = https://github.com/Jat15/angledwalls
+	branch = Rework-angledwall
