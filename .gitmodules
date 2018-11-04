@@ -159,3 +159,6 @@
 [submodule "mods/nodenation-mod/angledwalls_alias"]
 	path = mods/nodenation-mod/angledwalls_alias
 	url = https://github.com/Jat15/angledwalls_alias
+[submodule "mods/colored_block"]
+	path = mods/colored_block
+	url = https://github.com/Jat15/colored_block
