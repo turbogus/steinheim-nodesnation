@@ -28,9 +28,6 @@
 [submodule "mods/lpanes"]
 	path = mods/lpanes
 	url = https://github.com/brittm3/Minetest-lpanes
-[submodule "mods/ltc4000e"]
-	path = mods/ltc4000e
-	url = https://github.com/cheapie/ltc4000e
 [submodule "mods/mapfix"]
 	path = mods/mapfix
 	url = https://github.com/minetest-mods/mapfix
