@@ -150,3 +150,6 @@
 [submodule "mods/railroad_paraphernalia"]
 	path = mods/railroad_paraphernalia
 	url = https://github.com/h-v-smacker/railroad_paraphernalia
+[submodule "mods/ltc4000e"]
+	path = mods/ltc4000e
+	url = https://cheapiesystems.com/git/ltc4000e
