@@ -74,20 +74,14 @@ Colored_Block_Create(
 	{moreblocks = true, angledwalls = true, letters = true}
 )
 
-
-
-
-
-
---[[
 Colored_Block_Create(
-	{"default","default","default","default","default"},
-	{"wood","acacia_wood","aspen_wood","junglewood","pinewood"},
+	"colored_block_add",
+	"wood",
+	{"default:wood","default:acacia_wood","default:aspen_wood","default:junglewood","default:pine_wood"},
 	{
-		groups = {},
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1},
 		sounds = default.node_sound_wood_defaults(),
-		tiles = {"colored_block_add_stonebrick.png"},
+		tiles = {"colored_block_add_wood.png"},
 	},
-	{moreblocks = true, letters = true, angledwalls = true}
+	{moreblocks = true, angledwalls = true, letters = true}
 )
---]]
