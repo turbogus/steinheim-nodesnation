@@ -6,7 +6,8 @@
 	url = https://github.com/minetest-mods/anvil
 [submodule "mods/areas"]
 	path = mods/areas
-	url = https://github.com/MuhdNurHidayat/areas
+	url = https://github.com/Jat15/areas
+	branch = Nobreaker-fix
 [submodule "mods/digilines"]
 	path = mods/digilines
 	url = https://github.com/minetest-mods/digilines
