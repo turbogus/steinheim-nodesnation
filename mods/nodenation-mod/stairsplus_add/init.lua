@@ -22,7 +22,8 @@ local Block = {
 	"vehicles:window",
 	
 	--default
-	"default:coalblock"
+	"default:coalblock",
+	"default:clay"
 	
 }
 
