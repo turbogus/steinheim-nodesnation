@@ -82,7 +82,7 @@
 	branch = Nodenation
 [submodule "mods/currency"]
 	path = mods/currency
-	url = https://github.com/minetest-mods/currency
+	url = https://gitlab.com/VanessaE/currency
 [submodule "mods/billboard"]
 	path = mods/billboard
 	url = https://github.com/acmgit/billboard
