@@ -45,7 +45,7 @@
 	url = https://github.com/minetest-mods/mymillwork
 [submodule "mods/signs_lib"]
 	path = mods/signs_lib
-	url = https://github.com/minetest-mods/signs_lib
+	url = https://gitlab.com/VanessaE/signs_lib
 [submodule "mods/travelnet"]
 	path = mods/travelnet
 	url = https://github.com/Sokomine/travelnet
