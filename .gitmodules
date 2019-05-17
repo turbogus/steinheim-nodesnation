@@ -160,3 +160,6 @@
 	path = mods/areas
 	url = https://github.com/Jat15/areas
 	branch = Nobreaker-fix
+[submodule "mods/basic_materials"]
+	path = mods/basic_materials
+	url = https://gitlab.com/VanessaE/basic_materials
